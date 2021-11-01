@@ -47,17 +47,6 @@ export const Todolist = (props: TodolistPropsType) => {
 
             <AddItemForm callBack={addTaskHandler}/>
 
-            {/*<div>*/}
-            {/*    <input*/}
-            {/*        value={title}*/}
-            {/*        onChange={onChangeHandler}*/}
-            {/*        onKeyPress={onKeyPressHandler}*/}
-            {/*        className={error ? 'error' : ""}*/}
-            {/*    />*/}
-            {/*    <button onClick={() => onClickAddTaskHandler(title, props.todolistID)}>+</button>*/}
-            {/*    {error? <div className='error-message'>{error}</div> : ""}*/}
-            {/*</div>*/}
-
             <ul>
                 {props.tasks.map(t =>
                     <li>
