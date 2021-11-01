@@ -1,6 +1,7 @@
 import React, {ChangeEvent, KeyboardEvent, useState} from "react";
 import {filterType} from "./App";
 import {AddItemForm} from "./components/AddItemForm";
+import {EditableSpan} from "./components/EditableSpan";
 
 export type TodolistPropsType = {
     title: string
@@ -11,6 +12,7 @@ export type TodolistPropsType = {
     changeStatus: (isDone: boolean, id: string, todolistID: string) => void
     filter: filterType
     todolistID: string
+    updateTask: (id: string, title: string, todolistID: string)=> void
 }
 
 export type TaskPropsType = {
@@ -39,6 +41,10 @@ export const Todolist = (props: TodolistPropsType) => {
         props.addTask(title, props.todolistID)
     }
 
+    const updateTaskHandler =(id: string, title: string)=> {
+        props.updateTask(id, title, props.todolistID)
+    }
+
     return (
         <div>
             <h3>
@@ -57,7 +63,9 @@ export const Todolist = (props: TodolistPropsType) => {
                             checked={t.isDone}
                             onChange={(e) => onChangeStatusHandler(e, t.id, props.todolistID)}
                         />
-                        <span >{t.title}</span>
+
+                        <EditableSpan title={t.title} callBack={(title: string)=>updateTaskHandler(t.id, title)}/>
+                        {/*<span >{t.title}</span>*/}
                     </li>)
                 }
             </ul>

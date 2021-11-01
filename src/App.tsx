@@ -14,8 +14,8 @@ export type todolistsType = {
 
 function App() {
 
-    let todolistID1=v1()
-    let todolistID2= v1()
+    let todolistID1 = v1()
+    let todolistID2 = v1()
 
     let [todolists, setTodolists] = useState<Array<todolistsType>>([
         {id: todolistID1, title: "What to learn", filter: "all"},
@@ -40,7 +40,7 @@ function App() {
     });
 
     const changeFilter = (value: filterType, todolistID: string) => {
-        setTodolists(todolists.map(m=> m.id===todolistID? {...m, filter: value} : m))
+        setTodolists(todolists.map(m => m.id === todolistID ? {...m, filter: value} : m))
     }
 
     const removeTask = (id: string, todolistID: string) => {
@@ -49,22 +49,28 @@ function App() {
 
     const addTask = (title: string, todolistID: string) => {
         let newTitle = {id: v1(), title: title, isDone: true}
-        setTasks({...tasks, [todolistID]: [newTitle,...tasks[todolistID]]})
+        setTasks({...tasks, [todolistID]: [newTitle, ...tasks[todolistID]]})
     }
 
     const changeStatus = (isDone: boolean, id: string, todolistID: string) => {
-        setTasks({...tasks, [todolistID]: tasks[todolistID].map
-            (m=> m.id===id ? {...m, isDone:isDone} : m)})
+        setTasks({
+            ...tasks, [todolistID]: tasks[todolistID].map
+            (m => m.id === id ? {...m, isDone: isDone} : m)
+        })
     }
 
-    const addTodolistHandler=(title: string)=> {
-        let newTodolistID= v1()
+    const addTodolistHandler = (title: string) => {
+        let newTodolistID = v1()
         let newTodolist: todolistsType = {id: newTodolistID, title: title, filter: "all"}
         setTodolists([newTodolist, ...todolists])
         setTasks({
             ...tasks,
-            [newTodolistID]:[]
+            [newTodolistID]: []
         })
+    }
+
+    const updateTask = (id: string, title: string, todolistID: string) => {
+        setTasks({...tasks, [todolistID]: tasks[todolistID].map(m=> m.id===id ? {...m, title: title} : m)})
     }
 
     return (
@@ -93,6 +99,7 @@ function App() {
                             addTask={addTask}
                             changeStatus={changeStatus}
                             filter={m.filter}
+                            updateTask={updateTask}
                         />)
                 }
             )
