@@ -16,15 +16,16 @@ export const EditableSpan = (props: EditableSpanPropsType) => {
 
     const editModeFalseHandler = () => {
         setEditMode(false)
+        props.callBack(titleInput)
     }
 
     const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
         setTitleInput(e.currentTarget.value)
-        props.callBack(titleInput)
     }
 
     const onKeyPressHandler = (e: KeyboardEvent<HTMLInputElement>) => {
-        if (e.key === "Enter" ) {
+        if (e.key === "Enter") {
+            props.callBack(titleInput)
             setEditMode(false)
         }
     }
@@ -35,7 +36,7 @@ export const EditableSpan = (props: EditableSpanPropsType) => {
                      onChange={onChangeHandler}
                      autoFocus
                      onBlur={editModeFalseHandler}
-                     onKeyPress={onKeyPressHandler}
+                onKeyPress={onKeyPressHandler}
 
             />
             : <span onDoubleClick={editModeTrueHandler}>{props.title}</span>
