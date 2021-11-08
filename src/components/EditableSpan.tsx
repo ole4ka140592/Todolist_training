@@ -40,5 +40,6 @@ export const EditableSpan = (props: EditableSpanPropsType) => {
 
             />
             : <span onDoubleClick={editModeTrueHandler}>{props.title}</span>
+
     )
 }

@@ -59,7 +59,7 @@ function App() {
         })
     }
 
-    const addTodolistHandler = (title: string) => {
+    const addTodolist = (title: string) => {
         let newTodolistID = v1()
         let newTodolist: todolistsType = {id: newTodolistID, title: title, filter: "all"}
         setTodolists([newTodolist, ...todolists])
@@ -77,10 +77,14 @@ function App() {
         setTodolists(todolists.map(m=> m.id===todolistID ? {...m, title: title} : m))
     }
 
+    const removeTodolist =(todolistID: string)=> {
+        setTodolists(todolists.filter(f=> f.id!==todolistID))
+    }
+
     return (
         <div className="App">
 
-            <AddItemForm callBack={addTodolistHandler}/>
+            <AddItemForm callBack={addTodolist}/>
             {todolists.map(m => {
                     let tasksForTodolist = tasks[m.id]
 
@@ -105,6 +109,7 @@ function App() {
                             filter={m.filter}
                             updateTask={updateTask}
                             updateTitleTodolist={updateTitleTodolist}
+                            removeTodolist={removeTodolist}
                         />)
                 }
             )

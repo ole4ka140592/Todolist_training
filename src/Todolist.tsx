@@ -14,6 +14,7 @@ export type TodolistPropsType = {
     todolistID: string
     updateTask: (id: string, title: string, todolistID: string) => void
     updateTitleTodolist: (title: string, todolistID: string) => void
+    removeTodolist: (todolistID: string)=> void
 }
 
 export type TaskPropsType = {
@@ -50,11 +51,16 @@ export const Todolist = (props: TodolistPropsType) => {
         props.updateTitleTodolist(title, props.todolistID)
     }
 
+    const removeTodolistHandler=()=> {
+        props.removeTodolist(props.todolistID)
+    }
+
     return (
         <div>
 
             <h3>
                 <EditableSpan title={props.title} callBack={updateTitleTodolistHandler}/>
+                <button onClick={removeTodolistHandler}>X</button>
                 {/*{props.title}*/}
             </h3>
 
