@@ -26,27 +26,27 @@ export type updateTitleTodolistAT = {
     todolistID: string
 }
 
-export const todolistsReducer = (todolists: Array<TodolistsType>, action: ActionType) => {
+export const todolistsReducer = (state: Array<TodolistsType>, action: ActionType) => {
     switch (action.type) {
         case "REMOVE-TODOLIST": {
-            return todolists.filter(f => f.id !== action.todolistID)
+            return state.filter(f => f.id !== action.todolistID)
         }
 
         case "ADD-TODOLIST": {
             let newTodolistID = v1()
-            return [...todolists, {id: newTodolistID, title: action.title, filter: "all"}]
+            return [...state, {id: newTodolistID, title: action.title, filter: "all"}]
         }
 
         case "CHANGE-FILTER-TODOLIST": {
-            return todolists.map(m => m.id === action.todolistID ? {...m, filter: action.value} : m)
+            return state.map(m => m.id === action.todolistID ? {...m, filter: action.value} : m)
         }
 
         case "UPDATE-TITLE-TODOLIST": {
-            return todolists.map(m => m.id === action.todolistID ? {...m, title: action.title} : m)
+            return state.map(m => m.id === action.todolistID ? {...m, title: action.title} : m)
         }
 
         default:
-            return {...todolists}
+            return {...state}
     }
 }
 
