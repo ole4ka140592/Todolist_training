@@ -1,9 +1,8 @@
 import {v1} from "uuid";
-import {filterType, todolistsType} from "../App";
+import {filterType, TodolistsType} from "../App";
 import {
     ActionType,
     addTodolistAC,
-    addTodolistAT,
     changeFilterAC,
     removeTodolistAC,
     TodolistReducer, updateTitleTodolistAC
@@ -14,7 +13,7 @@ test('correct todolist should be removed', () => {
     let todolistId1 = v1();
     let todolistId2 = v1();
 
-    const startState: Array<todolistsType> = [
+    const startState: Array<TodolistsType> = [
         {id: todolistId1, title: "What to learn", filter: "all"},
         {id: todolistId2, title: "What to buy", filter: "all"}
     ]
@@ -32,7 +31,7 @@ test('correct todolist should be added', () => {
 
     let newTodolistTitle = "New Todolist";
 
-    const startState: Array<todolistsType> = [
+    const startState: Array<TodolistsType> = [
         {id: todolistId1, title: "What to learn", filter: "all"},
         {id: todolistId2, title: "What to buy", filter: "all"}
     ]
@@ -49,7 +48,7 @@ test('correct filter of todolist should be changed', () => {
 
     let newFilter: filterType = "completed";
 
-    const startState: Array<todolistsType> = [
+    const startState: Array<TodolistsType> = [
         {id: todolistId1, title: "What to learn", filter: "all"},
         {id: todolistId2, title: "What to buy", filter: "all"}
     ]
@@ -73,7 +72,7 @@ test('correct todolist should change its name', () => {
 
     let newTodolistTitle = "New Todolist";
 
-    const startState: Array<todolistsType> = [
+    const startState: Array<TodolistsType> = [
         {id: todolistId1, title: "What to learn", filter: "all"},
         {id: todolistId2, title: "What to buy", filter: "all"}
     ]
