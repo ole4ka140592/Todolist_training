@@ -74,7 +74,7 @@ export const tasksReducer = (state: TasksType, action: ActionType) => {
 
 
         default:
-            return {...state}
+            return state
     }
 }
 
