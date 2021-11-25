@@ -37,7 +37,7 @@ export type ChangeTitleTaskAT = {
 }
 
 
-export const tasksReducer = (state: TasksType, action: ActionType) => {
+export const tasksReducer = (state: TasksType, action: ActionType): TasksType => {
     switch (action.type) {
         case "REMOVE-TASK": {
             return ({...state, [action.todolistID]: state[action.todolistID].filter(f => f.id !== action.id)})
@@ -74,7 +74,7 @@ export const tasksReducer = (state: TasksType, action: ActionType) => {
 
 
         default:
-            return {...state}
+            return state
     }
 }
 
