@@ -6,34 +6,34 @@ import {TaskPropsType} from "../Todolist";
 
 type TasksPropsType = {
     task: TaskPropsType
-    removeTask: (id: string, todolistID: string) => void
-    changeStatus: (isDone: boolean, id: string, todolistID: string) => void
-    updateTask: (id: string, title: string, todolistID: string) => void
-    todolistID: string
+    removeTask: (id: string) => void
+    changeStatus: (isDone: boolean, id: string) => void
+    updateTask: (id: string, title: string) => void
+
 }
 
-export const Task = React.memo(({task, removeTask, changeStatus, updateTask, todolistID}: TasksPropsType) => {
+export const Task = React.memo(({task, removeTask, changeStatus, updateTask}: TasksPropsType) => {
 
-    const onClickRemoveTask = (id: string, todolistID: string) => {
-        removeTask(id, todolistID)
+    const onClickRemoveTask = (id: string) => {
+        removeTask(id)
     }
 
-    const onChangeStatusHandler = (e: ChangeEvent<HTMLInputElement>, id: string, todolistID: string) => {
-        changeStatus(e.currentTarget.checked, id, todolistID)
+    const onChangeStatusHandler = (e: ChangeEvent<HTMLInputElement>, id: string) => {
+        changeStatus(e.currentTarget.checked, id)
     }
 
     const updateTaskHandler = (id: string, title: string) => {
-        updateTask(id, title, todolistID)
+        updateTask(id, title)
     }
 
     return (
         <li key={task.id}>
-            <button onClick={() => onClickRemoveTask(task.id, todolistID)}>X</button>
+            <button onClick={() => onClickRemoveTask(task.id)}>X</button>
             <input
                 className={task.isDone ? "is-done" : ""}
                 type="checkbox"
                 checked={task.isDone}
-                onChange={(e) => onChangeStatusHandler(e, task.id, todolistID)}
+                onChange={(e) => onChangeStatusHandler(e, task.id)}
 
             />
 

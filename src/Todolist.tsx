@@ -44,17 +44,17 @@ export const Todolist = React.memo((props: TodolistPropsType) => {
         props.removeTodolist(props.todolistID)
     }
 
-    const removeTask = (id: string, todolistID: string) => {
-        props.removeTask(id, todolistID)
-    }
+    const removeTask = useCallback((id: string) => {
+        props.removeTask(id, props.todolistID)
+    },[])
 
-    const changeStatus = (isDone: boolean, id: string, todolistID: string) => {
-        props.changeStatus(isDone, id, todolistID)
-    }
+    const changeStatus = useCallback((isDone: boolean, id: string) => {
+        props.changeStatus(isDone, id, props.todolistID)
+    },[])
 
-    const updateTask = (id: string, title: string, todolistID: string) => {
-        props.updateTask(id, title, todolistID)
-    }
+    const updateTask = useCallback((id: string, title: string) => {
+        props.updateTask(id, title, props.todolistID)
+    },[])
 
 
 
@@ -87,7 +87,7 @@ export const Todolist = React.memo((props: TodolistPropsType) => {
                     removeTask={removeTask}
                     changeStatus={changeStatus}
                     updateTask={updateTask}
-                    todolistID={props.todolistID}/>)
+                    />)
                     // <li key={t.id}>
                     //     <button  onClick={() => onClickRemoveTask(t.id, props.todolistID)}>X</button>
                     //     <input
