@@ -35,7 +35,8 @@ export const AppWithRedux = () => {
     const dispatch = useDispatch()
 
     const removeTask =useCallback((id: string, todolistID: string) => {
-        (removeTaskAC(id, todolistID))
+        const action = removeTaskAC(id, todolistID);
+        dispatch(action);
     },[dispatch])
 
     const addTask = useCallback((title: string, todolistID: string) => {
@@ -68,25 +69,16 @@ export const AppWithRedux = () => {
     },[dispatch])
 
     return (
-        <div className="App">b
+        <div className="App">
             <AddItemForm callBack={addTodolist}/>
             {todolists.map(m => {
-                    let tasksForTodolist = tasks[m.id]
-
-                    if (m.filter === 'active') {
-                        tasksForTodolist = tasks[m.id].filter(f => !f.isDone)
-                    }
-
-                    if (m.filter === 'completed') {
-                        tasksForTodolist = tasks[m.id].filter(f => f.isDone)
-                    }
 
                     return (
                         <Todolist
                             todolistID={m.id}
                             key={m.id}
                             title={m.title}
-                            tasks={tasksForTodolist}
+                            tasks={tasks[m.id]}
                             removeTask={removeTask}
                             changeFilter={changeFilter}
                             addTask={addTask}

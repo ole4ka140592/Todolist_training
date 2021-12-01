@@ -2,6 +2,7 @@ import React, {ChangeEvent, KeyboardEvent, useCallback, useState} from "react";
 import {filterType} from "./App";
 import {AddItemForm} from "./components/AddItemForm";
 import {EditableSpan} from "./components/EditableSpan";
+import {Task} from "./components/Task";
 
 export type TodolistPropsType = {
     title: string
@@ -25,29 +26,15 @@ export type TaskPropsType = {
 
 export const Todolist = React.memo((props: TodolistPropsType) => {
 
-    console.log("Todolist")
-
-    const onClickRemoveTask = (id: string, todolistID: string) => {
-        props.removeTask(id, props.todolistID)
-    }
-
-    const changeFilterOnClickHandler = (value: filterType, todolistID: string) => {
+    const changeFilterOnClickHandler = useCallback((value: filterType, todolistID: string) => {
         props.changeFilter(value, todolistID)
-    }
-
-    const onChangeStatusHandler = (e: ChangeEvent<HTMLInputElement>, id: string, todolistID: string) => {
-        props.changeStatus(e.currentTarget.checked, id, props.todolistID)
-    }
+    },[props.changeFilter])
 
     // let [error, setError]=useState<null | string>(null)
 
     const addTaskHandler = useCallback((title: string) => {
         props.addTask(title, props.todolistID)
     }, [props.addTask, props.todolistID])
-
-    const updateTaskHandler = (id: string, title: string) => {
-        props.updateTask(id, title, props.todolistID)
-    }
 
     const updateTitleTodolistHandler = (title: string) => {
         props.updateTitleTodolist(title, props.todolistID)
@@ -56,6 +43,31 @@ export const Todolist = React.memo((props: TodolistPropsType) => {
     const removeTodolistHandler=()=> {
         props.removeTodolist(props.todolistID)
     }
+
+    const removeTask = (id: string, todolistID: string) => {
+        props.removeTask(id, todolistID)
+    }
+
+    const changeStatus = (isDone: boolean, id: string, todolistID: string) => {
+        props.changeStatus(isDone, id, todolistID)
+    }
+
+    const updateTask = (id: string, title: string, todolistID: string) => {
+        props.updateTask(id, title, todolistID)
+    }
+
+
+
+    let tasksForTodolist = props.tasks
+
+    if (props.filter === 'active') {
+        tasksForTodolist = tasksForTodolist.filter(f => !f.isDone)
+    }
+
+    if (props.filter === 'completed') {
+        tasksForTodolist = tasksForTodolist.filter(f => f.isDone)
+    }
+
 
     return (
         <div>
@@ -69,20 +81,26 @@ export const Todolist = React.memo((props: TodolistPropsType) => {
             <AddItemForm callBack={addTaskHandler}/>
 
             <ul>
-                {props.tasks.map(t =>
-                    <li key={t.id}>
-                        <button  onClick={() => onClickRemoveTask(t.id, props.todolistID)}>X</button>
-                        <input
-                            className={t.isDone ? "is-done" : ""}
-                            type="checkbox"
-                            checked={t.isDone}
-                            onChange={(e) => onChangeStatusHandler(e, t.id, props.todolistID)}
-
-                        />
-
-                        <EditableSpan title={t.title} callBack={(title: string) => updateTaskHandler(t.id, title)}/>
-                        {/*<span >{t.title}</span>*/}
-                    </li>)
+                {tasksForTodolist.map(t => <Task
+                    key={t.id}
+                    task={t}
+                    removeTask={removeTask}
+                    changeStatus={changeStatus}
+                    updateTask={updateTask}
+                    todolistID={props.todolistID}/>)
+                    // <li key={t.id}>
+                    //     <button  onClick={() => onClickRemoveTask(t.id, props.todolistID)}>X</button>
+                    //     <input
+                    //         className={t.isDone ? "is-done" : ""}
+                    //         type="checkbox"
+                    //         checked={t.isDone}
+                    //         onChange={(e) => onChangeStatusHandler(e, t.id, props.todolistID)}
+                    //
+                    //     />
+                    //
+                    //     <EditableSpan title={t.title} callBack={(title: string) => updateTaskHandler(t.id, title)}/>
+                    //     {/*<span >{t.title}</span>*/}
+                    // </li>)
                 }
             </ul>
 
