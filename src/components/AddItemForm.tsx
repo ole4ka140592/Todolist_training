@@ -4,7 +4,9 @@ type AddItemFormPropsType = {
     callBack: (title: string)=> void
 }
 
-export const AddItemForm=(props: AddItemFormPropsType)=> {
+export const AddItemForm=React.memo((props: AddItemFormPropsType)=> {
+
+
 
     let [title, setTitle] = useState("")
 
@@ -12,15 +14,14 @@ export const AddItemForm=(props: AddItemFormPropsType)=> {
 
     const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
         setTitle(e.currentTarget.value)
-        setError("")
+
     }
 
     const onKeyPressHandler = (e: KeyboardEvent<HTMLInputElement>) => {
+        if (error !== null) setError("")
         if (e.key === "Enter" && title.trim() !== "") {
             props.callBack(title)
             setTitle("")
-        } else {
-            setError("Title is required")
         }
     }
 
@@ -45,4 +46,4 @@ export const AddItemForm=(props: AddItemFormPropsType)=> {
             {error? <div className='error-message'>{error}</div> : ""}
         </div>
     )
-}
+})

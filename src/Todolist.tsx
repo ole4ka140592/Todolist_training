@@ -1,4 +1,4 @@
-import React, {ChangeEvent, KeyboardEvent, useState} from "react";
+import React, {ChangeEvent, KeyboardEvent, useCallback, useState} from "react";
 import {filterType} from "./App";
 import {AddItemForm} from "./components/AddItemForm";
 import {EditableSpan} from "./components/EditableSpan";
@@ -23,7 +23,9 @@ export type TaskPropsType = {
     isDone: boolean
 }
 
-export const Todolist = (props: TodolistPropsType) => {
+export const Todolist = React.memo((props: TodolistPropsType) => {
+
+    console.log("Todolist")
 
     const onClickRemoveTask = (id: string, todolistID: string) => {
         props.removeTask(id, props.todolistID)
@@ -39,9 +41,9 @@ export const Todolist = (props: TodolistPropsType) => {
 
     // let [error, setError]=useState<null | string>(null)
 
-    const addTaskHandler = (title: string) => {
+    const addTaskHandler = useCallback((title: string) => {
         props.addTask(title, props.todolistID)
-    }
+    }, [props.addTask, props.todolistID])
 
     const updateTaskHandler = (id: string, title: string) => {
         props.updateTask(id, title, props.todolistID)
@@ -68,13 +70,14 @@ export const Todolist = (props: TodolistPropsType) => {
 
             <ul>
                 {props.tasks.map(t =>
-                    <li>
-                        <button onClick={() => onClickRemoveTask(t.id, props.todolistID)}>X</button>
+                    <li key={t.id}>
+                        <button  onClick={() => onClickRemoveTask(t.id, props.todolistID)}>X</button>
                         <input
                             className={t.isDone ? "is-done" : ""}
                             type="checkbox"
                             checked={t.isDone}
                             onChange={(e) => onChangeStatusHandler(e, t.id, props.todolistID)}
+
                         />
 
                         <EditableSpan title={t.title} callBack={(title: string) => updateTaskHandler(t.id, title)}/>
@@ -96,4 +99,4 @@ export const Todolist = (props: TodolistPropsType) => {
             </div>
         </div>
     )
-}
+})
