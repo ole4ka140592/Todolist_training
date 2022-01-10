@@ -3,6 +3,8 @@ import {filterType} from "./App";
 import {AddItemForm} from "./components/AddItemForm";
 import {EditableSpan} from "./components/EditableSpan";
 import {Task} from "./components/Task";
+import {Button, IconButton} from "@material-ui/core";
+import {Delete} from "@material-ui/icons";
 
 export type TodolistPropsType = {
     title: string
@@ -74,7 +76,11 @@ export const Todolist = React.memo((props: TodolistPropsType) => {
 
             <h3>
                 <EditableSpan title={props.title} callBack={updateTitleTodolistHandler}/>
-                <button onClick={removeTodolistHandler}>X</button>
+
+                <IconButton aria-label="delete">
+                    <Delete onClick={removeTodolistHandler}/>
+                </IconButton>
+                {/*<button onClick={removeTodolistHandler}>X</button>*/}
                 {/*{props.title}*/}
             </h3>
 
@@ -105,15 +111,25 @@ export const Todolist = React.memo((props: TodolistPropsType) => {
             </ul>
 
             <div>
-                <button className={props.filter === "all" ? "active-filter" : ""}
-                        onClick={() => changeFilterOnClickHandler('all', props.todolistID)}>All
-                </button>
-                <button className={props.filter === "active" ? "active-filter" : ""}
-                        onClick={() => changeFilterOnClickHandler('active', props.todolistID)}>Active
-                </button>
-                <button className={props.filter === "completed" ? "active-filter" : ""}
-                        onClick={() => changeFilterOnClickHandler('completed', props.todolistID)}>Completed
-                </button>
+                <Button variant={props.filter === "all" ? "contained" : "outlined"} onClick={() => changeFilterOnClickHandler('all', props.todolistID)}>
+                    All
+                </Button>
+                <Button variant={props.filter === "active" ? "contained" : "outlined"} onClick={() => changeFilterOnClickHandler('active', props.todolistID)}>
+                    Active
+                </Button>
+                <Button variant={props.filter === "completed" ? "contained" : "outlined"} onClick={() => changeFilterOnClickHandler('completed', props.todolistID)}>
+                    Completed
+                </Button>
+
+                {/*<button className={props.filter === "all" ? "active-filter" : ""}*/}
+                {/*        onClick={() => changeFilterOnClickHandler('all', props.todolistID)}>All*/}
+                {/*</button>*/}
+                {/*<button className={props.filter === "active" ? "active-filter" : ""}*/}
+                {/*        onClick={() => changeFilterOnClickHandler('active', props.todolistID)}>Active*/}
+                {/*</button>*/}
+                {/*<button className={props.filter === "completed" ? "active-filter" : ""}*/}
+                {/*        onClick={() => changeFilterOnClickHandler('completed', props.todolistID)}>Completed*/}
+                {/*</button>*/}
             </div>
         </div>
     )

@@ -2,6 +2,8 @@ import {EditableSpan} from "./EditableSpan";
 import React, {ChangeEvent, useCallback} from "react";
 import {TasksType} from "../AppWithRedux";
 import {TaskPropsType} from "../Todolist";
+import {Delete} from "@material-ui/icons";
+import {IconButton} from "@material-ui/core";
 
 
 type TasksPropsType = {
@@ -28,7 +30,7 @@ export const Task = React.memo(({task, removeTask, changeStatus, updateTask}: Ta
 
     return (
         <li key={task.id}>
-            <button onClick={() => onClickRemoveTask(task.id)}>X</button>
+
             <input
                 className={task.isDone ? "is-done" : ""}
                 type="checkbox"
@@ -37,7 +39,12 @@ export const Task = React.memo(({task, removeTask, changeStatus, updateTask}: Ta
 
             />
 
+
             <EditableSpan title={task.title} callBack={(title: string) => updateTaskHandler(task.id, title)}/>
+            {/*<button onClick={() => onClickRemoveTask(task.id)}>X</button>*/}
+            <IconButton aria-label="delete">
+                <Delete onClick={() => onClickRemoveTask(task.id)}/>
+            </IconButton>
 
         </li>)
 })
