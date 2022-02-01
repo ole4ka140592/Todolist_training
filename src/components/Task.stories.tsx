@@ -10,7 +10,8 @@ export default {
     args: {
         removeTask: action("removeTask"),
         changeStatus: action("changeStatus"),
-        updateTask: action("updateTask")
+        updateTask: action("updateTask"),
+        todolist: "1"
     }
 } as ComponentMeta<typeof Task>;
 
@@ -18,13 +19,12 @@ const Template: ComponentStory<typeof Task> = (args) => <Task {...args} />;
 
 export const TaskIsDoneStory = Template.bind({});
 TaskIsDoneStory.args = {
-    task: {id: "123", title: "React", isDone: true},
+    task: {id: "123", title: "React", isDone: true}
 };
 
 export const TaskNotDoneStory = Template.bind({});
 TaskNotDoneStory.args = {
-    task: {id: "123", title: "React", isDone: false},
-
+    task: {id: "123", title: "React", isDone: false}
 };
 
 
