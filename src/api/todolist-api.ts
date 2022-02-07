@@ -20,13 +20,28 @@ export const todolistApi = {
         return instance.get<Array<TodoType>>("todo-lists")
     },
     createTodo(title: string) {
-        return instance.post<BaseType<{item: TodoType}>>("todo-lists", {title}, settings)
+        return instance.post<BaseType<{item: TodoType}>>("todo-lists", {title})
     },
     deleteTodo(todolistId: string) {
         return instance.delete<BaseType>(`todo-lists/${todolistId}`)
     },
     updateTodoTitle(todolistId: string, title: string) {
         return instance.put<BaseType>(`todo-lists/${todolistId}`, {title})
+    }
+}
+
+export const taskApi = {
+    getTasks(todolistId: string) {
+        return instance.get<GetTaskResponseType>(`todo-lists/${todolistId}/tasks`)
+    },
+
+    postTasks(todolistId: string, title: string) {
+        return instance.post(`todo-lists/${todolistId}/tasks`, {title})
+    },
+
+
+    deleteTask(todolistId: string, taskId: string) {
+        return instance.delete<BaseType>(`todo-lists/${todolistId}/tasks/${taskId}`)
     }
 }
 
@@ -43,3 +58,24 @@ type BaseType<T = {}> = {
     resultCode: number
     data: T
 }
+
+type GetTaskResponseType = {
+    error: null | string
+    items: Array<TaskResponseType>
+    totalCount: number
+}
+
+type TaskResponseType = {
+    description: string
+    title: string
+    completed: boolean
+    status: number
+    priority: number
+    startDate: string
+    deadline: string
+    id: string
+    todoListId: string
+    order: number
+    addedDate: string
+}
+

@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react'
-import {todolistApi} from "../api/todolist-api";
+import {taskApi, todolistApi} from "../api/todolist-api";
 
 export default {
     title: 'API'
@@ -17,6 +17,7 @@ export const GetTodolists = () => {
 
     return <div> {JSON.stringify(state)}</div>
 }
+
 export const CreateTodolist = () => {
     const [state, setState] = useState<any>(null)
     useEffect(() => {
@@ -47,6 +48,47 @@ export const UpdateTodolistTitle = () => {
         let todolistId = "fc724001-24c3-4f5b-aa21-b9732096ada5"
         let title = "MIRA"
         todolistApi.updateTodoTitle(todolistId, title)
+            .then((res) => {
+                setState(res.data)
+            })
+    }, [])
+
+    return <div> {JSON.stringify(state)}</div>
+}
+
+export const GetTasks = () => {
+    const [state, setState] = useState<any>(null)
+    useEffect(() => {
+        let todolistId = "fe0ec3d1-164d-4f71-b0ea-054b51d9f881"
+        taskApi.getTasks(todolistId)
+            .then((res) => {
+                setState(res.data)
+            })
+    }, [])
+
+    return <div> {JSON.stringify(state)}</div>
+}
+
+export const PostTask = () => {
+    const [state, setState] = useState<any>(null)
+    useEffect(() => {
+        let todolistId = "fe0ec3d1-164d-4f71-b0ea-054b51d9f881"
+        let title = "JS3333"
+        taskApi.postTasks(todolistId, title)
+            .then((res) => {
+                setState(res.data)
+            })
+    }, [])
+
+    return <div> {JSON.stringify(state)}</div>
+}
+
+export const DeleteTaskTodolist = () => {
+    const [state, setState] = useState<any>(null)
+    useEffect(() => {
+        let todolistId = "fe0ec3d1-164d-4f71-b0ea-054b51d9f881"
+        let taskId = "9d0037de-2886-4306-a76c-3a3890f0ba25"
+        taskApi.deleteTask(todolistId, taskId)
             .then((res) => {
                 setState(res.data)
             })
