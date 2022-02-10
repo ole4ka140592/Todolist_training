@@ -1,36 +1,37 @@
-import React, {ChangeEvent, KeyboardEvent, useCallback, useState} from "react";
-import {filterType} from "./App";
+import React, {useCallback} from "react";
 import {AddItemForm} from "./components/AddItemForm";
 import {EditableSpan} from "./components/EditableSpan";
 import {Task} from "./components/Task";
 import {Button, IconButton} from "@material-ui/core";
 import {Delete} from "@material-ui/icons";
+import {TaskStatuses, TaskType} from "./api/todolist-api";
+import {filterType} from "./state/todolistsReducer";
 
 export type TodolistPropsType = {
     title: string
-    tasks: Array<TaskPropsType>
+    tasks: Array<TaskType>
     removeTask: (id: string, todolistID: string) => void
     changeFilter: (value: filterType, todolistID: string) => void
     addTask: (title: string, todolistID: string) => void
-    changeStatus: (isDone: boolean, id: string, todolistID: string) => void
+    changeStatus: (status: TaskStatuses, id: string, todolistID: string) => void
     filter: filterType
     todolistID: string
     updateTask: (id: string, title: string, todolistID: string) => void
     updateTitleTodolist: (title: string, todolistID: string) => void
-    removeTodolist: (todolistID: string)=> void
+    removeTodolist: (todolistID: string) => void
 }
 
-export type TaskPropsType = {
-    id: string
-    title: string
-    isDone: boolean
-}
+// export type TaskPropsType = {
+//     id: string
+//     title: string
+//     isDone: boolean
+// }
 
 export const Todolist = React.memo((props: TodolistPropsType) => {
 
     const changeFilterOnClickHandler = useCallback((value: filterType, todolistID: string) => {
         props.changeFilter(value, todolistID)
-    },[props.changeFilter])
+    }, [props.changeFilter])
 
     // let [error, setError]=useState<null | string>(null)
 
@@ -42,32 +43,31 @@ export const Todolist = React.memo((props: TodolistPropsType) => {
         props.updateTitleTodolist(title, props.todolistID)
     }
 
-    const removeTodolistHandler=()=> {
+    const removeTodolistHandler = () => {
         props.removeTodolist(props.todolistID)
     }
 
     const removeTask = useCallback((id: string) => {
         props.removeTask(id, props.todolistID)
-    },[])
+    }, [])
 
-    const changeStatus = useCallback((isDone: boolean, id: string) => {
-        props.changeStatus(isDone, id, props.todolistID)
-    },[])
+    const changeStatus = useCallback((status: TaskStatuses, id: string) => {
+        props.changeStatus(status, id, props.todolistID)
+    }, [])
 
     const updateTask = useCallback((id: string, title: string) => {
         props.updateTask(id, title, props.todolistID)
-    },[])
-
+    }, [])
 
 
     let tasksForTodolist = props.tasks
 
     if (props.filter === 'active') {
-        tasksForTodolist = tasksForTodolist.filter(f => !f.isDone)
+        tasksForTodolist = tasksForTodolist.filter(f => TaskStatuses.New)
     }
 
     if (props.filter === 'completed') {
-        tasksForTodolist = tasksForTodolist.filter(f => f.isDone)
+        tasksForTodolist = tasksForTodolist.filter(f => TaskStatuses.Completed)
     }
 
 
@@ -93,43 +93,25 @@ export const Todolist = React.memo((props: TodolistPropsType) => {
                     removeTask={removeTask}
                     changeStatus={changeStatus}
                     updateTask={updateTask}
-                    />)
-                    // <li key={t.id}>
-                    //     <button  onClick={() => onClickRemoveTask(t.id, props.todolistID)}>X</button>
-                    //     <input
-                    //         className={t.isDone ? "is-done" : ""}
-                    //         type="checkbox"
-                    //         checked={t.isDone}
-                    //         onChange={(e) => onChangeStatusHandler(e, t.id, props.todolistID)}
-                    //
-                    //     />
-                    //
-                    //     <EditableSpan title={t.title} callBack={(title: string) => updateTaskHandler(t.id, title)}/>
-                    //     {/*<span >{t.title}</span>*/}
-                    // </li>)
+                />)
+
                 }
             </ul>
 
             <div>
-                <Button variant={props.filter === "all" ? "contained" : "outlined"} onClick={() => changeFilterOnClickHandler('all', props.todolistID)}>
+                <Button variant={props.filter === "all" ? "contained" : "outlined"}
+                        onClick={() => changeFilterOnClickHandler('all', props.todolistID)}>
                     All
                 </Button>
-                <Button variant={props.filter === "active" ? "contained" : "outlined"} onClick={() => changeFilterOnClickHandler('active', props.todolistID)}>
+                <Button variant={props.filter === "active" ? "contained" : "outlined"}
+                        onClick={() => changeFilterOnClickHandler('active', props.todolistID)}>
                     Active
                 </Button>
-                <Button variant={props.filter === "completed" ? "contained" : "outlined"} onClick={() => changeFilterOnClickHandler('completed', props.todolistID)}>
+                <Button variant={props.filter === "completed" ? "contained" : "outlined"}
+                        onClick={() => changeFilterOnClickHandler('completed', props.todolistID)}>
                     Completed
                 </Button>
 
-                {/*<button className={props.filter === "all" ? "active-filter" : ""}*/}
-                {/*        onClick={() => changeFilterOnClickHandler('all', props.todolistID)}>All*/}
-                {/*</button>*/}
-                {/*<button className={props.filter === "active" ? "active-filter" : ""}*/}
-                {/*        onClick={() => changeFilterOnClickHandler('active', props.todolistID)}>Active*/}
-                {/*</button>*/}
-                {/*<button className={props.filter === "completed" ? "active-filter" : ""}*/}
-                {/*        onClick={() => changeFilterOnClickHandler('completed', props.todolistID)}>Completed*/}
-                {/*</button>*/}
             </div>
         </div>
     )

@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react'
-import {taskApi, todolistApi} from "../api/todolist-api";
+import {todolistApi} from "../api/todolist-api";
 
 export default {
     title: 'API'
@@ -33,7 +33,7 @@ export const CreateTodolist = () => {
 export const DeleteTodolist = () => {
     const [state, setState] = useState<any>(null)
     useEffect(() => {
-        let todolistId = "6216083d-59cf-4162-88d5-f6415827b75d"
+        let todolistId = "6e111139-b039-4ddc-9b4f-cd23b3c0e5ff"
         todolistApi.deleteTodo(todolistId)
             .then((res) => {
                 setState(res.data)
@@ -60,7 +60,7 @@ export const GetTasks = () => {
     const [state, setState] = useState<any>(null)
     useEffect(() => {
         let todolistId = "222eab46-64f3-42cb-85fc-ba8168e6fbc4"
-        taskApi.getTasks(todolistId)
+        todolistApi.getTasks(todolistId)
             .then((res) => {
                 setState(res.data)
             })
@@ -74,7 +74,7 @@ export const CreateTask = () => {
     useEffect(() => {
         let todolistId = "eada874d-16e5-4f89-821e-529c2784bd5b"
         let title = "!!!!!!!"
-        taskApi.createTask(todolistId, title)
+        todolistApi.createTask(todolistId, title)
             .then((res) => {
                 setState(res.data)
             })
@@ -87,14 +87,14 @@ export const UpdateTask = () => {
     const [state, setState] = useState<any>(null)
     useEffect(() => {
         let todolistId = "222eab46-64f3-42cb-85fc-ba8168e6fbc4"
-        let taskId = "f98aa0dd-fd6b-4eac-a637-f208a9619447"
-        let title = "111111111111"
+        let taskId = "f8d87d60-917a-44bd-ad65-97e8da98e65b"
+        let title = "!!!!!!!!!!!!!!!!!!!"
         let description = "2222222"
         let status =  2
         let priority = 3
         let startDate = null
         let deadline = null
-        taskApi.updateTask(todolistId, taskId,
+        todolistApi.updateTask(todolistId, taskId,
             {title,
                 description, status, priority, startDate, deadline})
             .then((res) => {
@@ -111,7 +111,7 @@ export const DeleteTaskTodolist = () => {
     useEffect(() => {
         let todolistId = "222eab46-64f3-42cb-85fc-ba8168e6fbc4"
         let taskId = "7f6472a6-1eb8-4d31-a541-dde02e26d7bd"
-        taskApi.deleteTask(todolistId, taskId)
+        todolistApi.deleteTask(todolistId, taskId)
             .then((res) => {
                 setState(res.data)
             })
