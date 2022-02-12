@@ -1,4 +1,4 @@
-import React, {useCallback, useReducer} from 'react';
+import React, {useReducer} from 'react';
 import './App.css';
 import {Todolist} from "./Todolist";
 import {v1} from "uuid";
@@ -14,7 +14,7 @@ import {addTaskAC, changeStatusTaskAC, changeTitleTaskAC, removeTaskAC, tasksRed
 import {TaskPriorities, TaskStatuses, TaskType} from "./api/todolist-api";
 
 
-export const AppWithReducer = () => {
+const AppWithReducer = () => {
 
     let todolistID1 = v1()
     let todolistID2 = v1()
@@ -55,9 +55,9 @@ export const AppWithReducer = () => {
         dispatchToTasks(removeTaskAC(id, todolistID))
     }
 
-    const addTask = (title: string, todolistID: string) => {
-        dispatchToTasks(addTaskAC(title, todolistID))
-    }
+    // const addTask = (title: string, todolistID: string) => {
+    //     dispatchToTasks(addTaskAC(title, todolistID))
+    // }
 
     const changeStatus = (status: TaskStatuses, id: string, todolistID: string) => {
         dispatchToTasks(changeStatusTaskAC(status, id, todolistID))
@@ -89,36 +89,36 @@ export const AppWithReducer = () => {
     return (
         <div className="App">
 
-            <AddItemForm callBack={addTodolist}/>
-            {todolists.map(m => {
-                    let tasksForTodolist = tasks[m.id]
+            {/*<AddItemForm callBack={addTodolist}/>*/}
+            {/*{todolists.map(m => {*/}
+            {/*        let tasksForTodolist = tasks[m.id]*/}
 
-                    if (m.filter === 'active') {
-                        tasksForTodolist = tasks[m.id].filter(f => TaskStatuses.New)
-                    }
+            {/*        if (m.filter === 'active') {*/}
+            {/*            tasksForTodolist = tasks[m.id].filter(f => TaskStatuses.New)*/}
+            {/*        }*/}
 
-                    if (m.filter === 'completed') {
-                        tasksForTodolist = tasks[m.id].filter(f => TaskStatuses.Completed)
-                    }
+            {/*        if (m.filter === 'completed') {*/}
+            {/*            tasksForTodolist = tasks[m.id].filter(f => TaskStatuses.Completed)*/}
+            {/*        }*/}
 
-                    return (
-                        <Todolist
-                            todolistID={m.id}
-                            key={m.id}
-                            title={m.title}
-                            tasks={tasksForTodolist}
-                            removeTask={removeTask}
-                            changeFilter={changeFilter}
-                            addTask={addTask}
-                            changeStatus={changeStatus}
-                            filter={m.filter}
-                            updateTask={updateTask}
-                            updateTitleTodolist={updateTitleTodolist}
-                            removeTodolist={removeTodolist}
-                        />)
-                }
-            )
-            }
+            {/*        return (*/}
+            {/*            <Todolist*/}
+            {/*                todolistID={m.id}*/}
+            {/*                key={m.id}*/}
+            {/*                title={m.title}*/}
+            {/*                tasks={tasksForTodolist}*/}
+            {/*                removeTask={removeTask}*/}
+            {/*                changeFilter={changeFilter}*/}
+            {/*                // addTask={addTask}*/}
+            {/*                changeStatus={changeStatus}*/}
+            {/*                filter={m.filter}*/}
+            {/*                updateTask={updateTask}*/}
+            {/*                updateTitleTodolist={updateTitleTodolist}*/}
+            {/*                removeTodolist={removeTodolist}*/}
+            {/*            />)*/}
+            {/*    }*/}
+            {/*)*/}
+            {/*}*/}
 
 
         </div>

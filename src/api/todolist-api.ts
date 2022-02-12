@@ -109,26 +109,26 @@ type BaseTaskType<T = {}> = {
     data: T
 }
 
-type CreateTaskType = {
-    fieldsErrors: Array<string>
-    messages: Array<string>
-    resultCode: number
-    data: { item: TaskType }
-}
-
-type UpdateTaskType = {
-    fieldsErrors: Array<string>
-    messages: Array<string>
-    resultCode: number
-    data: { item: UpdateModelTaskType }
-}
-
-type DeleteTaskType = {
-    fieldsErrors: Array<string>
-    messages: Array<string>
-    resultCode: number
-    data: {}
-}
+// type CreateTaskType = {
+//     fieldsErrors: Array<string>
+//     messages: Array<string>
+//     resultCode: number
+//     data: { item: TaskType }
+// }
+//
+// type UpdateTaskType = {
+//     fieldsErrors: Array<string>
+//     messages: Array<string>
+//     resultCode: number
+//     data: { item: UpdateModelTaskType }
+// }
+//
+// type DeleteTaskType = {
+//     fieldsErrors: Array<string>
+//     messages: Array<string>
+//     resultCode: number
+//     data: {}
+// }
 
 
 
