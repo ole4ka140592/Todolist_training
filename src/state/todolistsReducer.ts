@@ -1,8 +1,14 @@
 import {v1} from "uuid";
-import {TodolistType} from "../api/todolist-api";
+import {todolistApi, TodolistType} from "../api/todolist-api";
+import {AppRootStateType} from "./store";
+import {Dispatch} from "redux";
 
 
-export type ActionType = RemoveTodolistAT | AddTodolistAT | ChangeFilterAT | UpdateTitleTodolistAT
+export type ActionType = RemoveTodolistAT
+    | AddTodolistAT
+    | ChangeFilterAT
+    | UpdateTitleTodolistAT
+    | SetTodolistsAT
 
 export type RemoveTodolistAT = {
     type: "REMOVE-TODOLIST"
@@ -27,15 +33,18 @@ export type UpdateTitleTodolistAT = {
     todolistID: string
 }
 
+export type SetTodolistsAT = ReturnType<typeof setTodolistsAC>
+
 export type filterType = 'all' | 'active' | 'completed'
 
 export type TodolistDomainType = TodolistType & {
     filter: filterType
 }
 
+
 let initialState: Array<TodolistDomainType> = []
 
-export const todolistsReducer = (state: Array<TodolistDomainType>=initialState, action: ActionType):
+export const todolistsReducer = (state: Array<TodolistDomainType> = initialState, action: ActionType):
     Array<TodolistDomainType> => {
     switch (action.type) {
         case "REMOVE-TODOLIST": {
@@ -54,6 +63,12 @@ export const todolistsReducer = (state: Array<TodolistDomainType>=initialState, 
         case "UPDATE-TITLE-TODOLIST": {
             return state.map(m => m.id === action.todolistID ? {...m, title: action.title} : m)
         }
+
+        case "SET-TODOLISTS": {
+            return action.todolists.map(m => ({...m, filter: "all"})
+            )
+        }
+
 
         default:
             return state
@@ -89,4 +104,18 @@ export const updateTitleTodolistAC = (title: string, todolistID: string): Update
         title,
         todolistID
     }
+}
+
+export const setTodolistsAC = (todolists: Array<TodolistType>) => {
+    return {
+        type: "SET-TODOLISTS",
+        todolists
+    } as const
+}
+
+export const setTodolistsThunk = (dispatch: Dispatch, getState: AppRootStateType) => {
+    todolistApi.getTodos()
+        .then((res)=> {
+            dispatch(setTodolistsAC(res.data))
+        })
 }
