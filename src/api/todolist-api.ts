@@ -93,7 +93,7 @@ type GetTaskResponseType = {
     totalCount: number
 }
 
-type UpdateModelTaskType = {
+export type UpdateModelTaskType = {
     title: string
     description: string
     status: number
