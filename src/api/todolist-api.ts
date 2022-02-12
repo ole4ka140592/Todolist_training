@@ -96,8 +96,8 @@ type GetTaskResponseType = {
 export type UpdateModelTaskType = {
     title: string
     description: string
-    status: number
-    priority: number
+    status: TaskStatuses
+    priority: TaskPriorities
     startDate: string | null
     deadline: string | null
 }

@@ -59,9 +59,9 @@ const AppWithReducer = () => {
     //     dispatchToTasks(addTaskAC(title, todolistID))
     // }
 
-    const changeStatus = (status: TaskStatuses, id: string, todolistID: string) => {
-        dispatchToTasks(changeStatusTaskAC(status, id, todolistID))
-    }
+    // const changeStatus = (todolistID: string, id: string, status: TaskStatuses) => {
+    //     dispatchToTasks(changeStatusTaskAC(todolistID, id, status))
+    // }
 
     const updateTask = (id: string, title: string, todolistID: string) => {
         dispatchToTasks(changeTitleTaskAC(title, id, todolistID))

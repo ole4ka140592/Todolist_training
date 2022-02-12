@@ -9,14 +9,12 @@ import {
     updateTitleTodolistAC
 } from "./state/todolistsReducer";
 import {
-    addTaskTC,
-    changeStatusTaskAC,
-    removeTaskTC, updateTaskTC,
+    addTaskTC, changeStatusTC, removeTaskTC, updateTaskTitleTC,
 
 } from "./state/taskReducer";
 import {AppRootStateType} from "./state/store";
 import {useDispatch, useSelector} from "react-redux";
-import {TaskStatuses, UpdateModelTaskType} from "./api/todolist-api";
+import {TaskStatuses} from "./api/todolist-api";
 import {TasksStateType} from "./App";
 
 
@@ -42,13 +40,14 @@ export const AppWithRedux = () => {
         dispatch(addTaskTC(todolistID, title))
     }, [dispatch])
 
-    const changeStatus = useCallback((status: TaskStatuses, id: string, todolistID: string) => {
-        dispatch(changeStatusTaskAC(status, id, todolistID))
+    const changeStatus = useCallback((todolistID: string, id: string, status: TaskStatuses) => {
+        dispatch(changeStatusTC(todolistID, id, status))
+        // dispatch(changeStatusTaskAC(todolistID, id, status))
     }, [dispatch])
 
     const updateTask = useCallback((todolistID: string, id: string, title: string) => {
         debugger
-        dispatch(updateTaskTC(todolistID, id, title))
+        dispatch(updateTaskTitleTC(todolistID, id, title))
         // dispatch(changeTitleTaskAC(title, id, todolistID))
     }, [dispatch])
 

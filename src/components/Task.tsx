@@ -21,7 +21,7 @@ export const Task = React.memo(({task, removeTask, changeStatus, updateTask}: Ta
 
     const onChangeStatusHandler = (e: ChangeEvent<HTMLInputElement>, id: string) => {
         let newIsDoneValue = e.currentTarget.checked
-        changeStatus(newIsDoneValue ? TaskStatuses.Completed : TaskStatuses.Completed, id)
+        changeStatus(newIsDoneValue ? TaskStatuses.Completed : TaskStatuses.New, id)
     }
 
     const updateTaskHandler = (id: string, title: string) => {

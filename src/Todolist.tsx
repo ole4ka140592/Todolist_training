@@ -15,7 +15,7 @@ export type TodolistPropsType = {
     removeTask: (id: string, todolistID: string) => void
     changeFilter: (value: filterType, todolistID: string) => void
     addTask: (title: string, todolistID: string) => void
-    changeStatus: (status: TaskStatuses, id: string, todolistID: string) => void
+    changeStatus: (todolistID: string, id: string, status: TaskStatuses) => void
     filter: filterType
     todolistID: string
     updateTask: (todolistID: string, id: string, title: string) => void
@@ -59,7 +59,7 @@ export const Todolist = React.memo((props: TodolistPropsType) => {
     }, [])
 
     const changeStatus = useCallback((status: TaskStatuses, id: string) => {
-        props.changeStatus(status, id, props.todolistID)
+        props.changeStatus(props.todolistID, id, status)
     }, [])
 
     const updateTask = useCallback((id: string, title: string) => {
