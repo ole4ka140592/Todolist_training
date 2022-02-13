@@ -118,7 +118,6 @@ export const Todolist = React.memo((props: TodolistPropsType) => {
                         onClick={() => changeFilterOnClickHandler('completed', props.todolistID)}>
                     Completed
                 </Button>
-
             </div>
         </div>
     )

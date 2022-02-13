@@ -3,8 +3,8 @@ import './App.css';
 import {Todolist} from "./Todolist";
 import {AddItemForm} from "./components/AddItemForm";
 import {
-    addTodolistTC, changeFilterAC, filterType, removeTodolistTC, setTodolistsTC,
-    TodolistDomainType, updateTitleTodolistTC
+    addTodolistTC, changeFilterAC, filterType, removeTodolistTC, setTodolistsTC, TodolistDomainType,
+    updateTitleTodolistTC
 } from "./state/todolistsReducer";
 import {addTaskTC, changeStatusTC, removeTaskTC, updateTaskTitleTC} from "./state/taskReducer";
 import {AppRootStateType} from "./state/store";
@@ -94,12 +94,8 @@ export const AppWithRedux = () => {
                 }
             )
             }
-
-
         </div>
     )
-
-
 }
 
 
