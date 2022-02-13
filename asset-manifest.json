@@ -1,0 +1,20 @@
+{
+  "files": {
+    "main.css": "/Homework_it_incubator/static/css/main.22b62642.chunk.css",
+    "main.js": "/Homework_it_incubator/static/js/main.09b5e438.chunk.js",
+    "main.js.map": "/Homework_it_incubator/static/js/main.09b5e438.chunk.js.map",
+    "runtime-main.js": "/Homework_it_incubator/static/js/runtime-main.4cd8fc1a.js",
+    "runtime-main.js.map": "/Homework_it_incubator/static/js/runtime-main.4cd8fc1a.js.map",
+    "static/js/2.ce7c116c.chunk.js": "/Homework_it_incubator/static/js/2.ce7c116c.chunk.js",
+    "static/js/2.ce7c116c.chunk.js.map": "/Homework_it_incubator/static/js/2.ce7c116c.chunk.js.map",
+    "index.html": "/Homework_it_incubator/index.html",
+    "static/css/main.22b62642.chunk.css.map": "/Homework_it_incubator/static/css/main.22b62642.chunk.css.map",
+    "static/js/2.ce7c116c.chunk.js.LICENSE.txt": "/Homework_it_incubator/static/js/2.ce7c116c.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.4cd8fc1a.js",
+    "static/js/2.ce7c116c.chunk.js",
+    "static/css/main.22b62642.chunk.css",
+    "static/js/main.09b5e438.chunk.js"
+  ]
+}
