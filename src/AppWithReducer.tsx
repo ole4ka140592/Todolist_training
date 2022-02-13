@@ -71,11 +71,11 @@ const AppWithReducer = () => {
         dispatchToTodolists(changeFilterAC(value, todolistID))
     }
 
-    const addTodolist = (title: string) => {
-        let action = addTodolistAC(title)
-        dispatchToTodolists(action)
-        dispatchToTasks(action)
-    }
+    // const addTodolist = (title: string) => {
+    //     let action = addTodolistAC(title)
+    //     dispatchToTodolists(action)
+    //     dispatchToTasks(action)
+    // }
 
     const updateTitleTodolist = (title: string, todolistID: string) => {
         dispatchToTodolists(updateTitleTodolistAC(title, todolistID))
