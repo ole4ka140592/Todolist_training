@@ -96,7 +96,7 @@ export const updateTitleTodolistTC = (title: string, todolistID: string) =>
 
 
 //types
-type TodolistsActionType =
+export type TodolistsActionType =
     | ReturnType<typeof changeFilterAC>
     | ReturnType<typeof updateTitleTodolistAC>
     | AddTodolistAT

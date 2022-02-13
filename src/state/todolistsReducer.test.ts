@@ -1,6 +1,6 @@
 import {v1} from "uuid";
 import {
-    ActionType,
+    TodolistsActionType,
     addTodolistAC,
     changeFilterAC, filterType,
     removeTodolistAC, setTodolistsAC, TodolistDomainType,
@@ -45,7 +45,7 @@ test('correct filter of todolist should be changed', () => {
 
     let newFilter: filterType = "completed";
 
-    const action: ActionType = {
+    const action: TodolistsActionType = {
         type: 'CHANGE-FILTER-TODOLIST',
         value: newFilter,
         todolistID: todolistId2,
