@@ -1,17 +1,17 @@
 import React, {useReducer} from 'react';
-import './App.css';
-import {Todolist} from "./Todolist";
+import '../app/App.css';
+import {Todolist} from "../features/Todolist";
 import {v1} from "uuid";
-import {AddItemForm} from "./components/AddItemForm";
+import {AddItemForm} from "../components/AddItemForm";
 import {
     addTodolistAC,
     changeFilterAC, filterType,
     removeTodolistAC,
     todolistsReducer,
     updateTitleTodolistAC
-} from "./state/todolistsReducer";
-import {addTaskAC, changeStatusTaskAC, changeTitleTaskAC, removeTaskAC, tasksReducer} from "./state/taskReducer";
-import {TaskPriorities, TaskStatuses, TaskType} from "./api/todolist-api";
+} from "../state/todolistsReducer";
+import {addTaskAC, changeStatusTaskAC, changeTitleTaskAC, removeTaskAC, tasksReducer} from "../state/taskReducer";
+import {TaskPriorities, TaskStatuses, TaskType} from "../api/todolist-api";
 import {LowPriority} from "@material-ui/icons";
 
 

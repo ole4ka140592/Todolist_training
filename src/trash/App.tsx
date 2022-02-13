@@ -1,11 +1,11 @@
 import React, {useState} from 'react';
-import './App.css';
-import {Todolist} from "./Todolist";
+import '../app/App.css';
+import {Todolist} from "./../features/Todolist";
 import {v1} from "uuid";
-import {AddItemForm} from "./components/AddItemForm";
+import {AddItemForm} from "../components/AddItemForm";
 import {Container, Grid} from "@material-ui/core";
-import {TaskPriorities, TaskStatuses, TaskType} from "./api/todolist-api";
-import {filterType, TodolistDomainType} from "./state/todolistsReducer";
+import {TaskPriorities, TaskStatuses, TaskType} from "../api/todolist-api";
+import {filterType, TodolistDomainType} from "../state/todolistsReducer";
 
 
 export type TasksStateType = {

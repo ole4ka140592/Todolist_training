@@ -1,12 +1,12 @@
 import React, {useCallback, useEffect} from "react";
-import {AddItemForm} from "./components/AddItemForm";
-import {EditableSpan} from "./components/EditableSpan";
-import {Task} from "./components/Task";
+import {AddItemForm} from "../components/AddItemForm";
+import {EditableSpan} from "../components/EditableSpan";
+import {Task} from "../components/Task";
 import {Button, IconButton} from "@material-ui/core";
 import {Delete} from "@material-ui/icons";
-import {TaskStatuses, TaskType} from "./api/todolist-api";
-import {filterType} from "./state/todolistsReducer";
-import {setTasksTC} from "./state/taskReducer";
+import {TaskStatuses, TaskType} from "../api/todolist-api";
+import {filterType} from "../state/todolistsReducer";
+import {setTasksTC} from "../state/taskReducer";
 import {useDispatch} from "react-redux";
 
 export type TodolistPropsType = {

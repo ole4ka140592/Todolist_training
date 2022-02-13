@@ -1,16 +1,16 @@
 import React, {useCallback, useEffect} from 'react';
 import './App.css';
-import {Todolist} from "./Todolist";
-import {AddItemForm} from "./components/AddItemForm";
+import {Todolist} from "../features/Todolist";
+import {AddItemForm} from "../components/AddItemForm";
 import {
     addTodolistTC, changeFilterAC, filterType, removeTodolistTC, setTodolistsTC, TodolistDomainType,
     updateTitleTodolistTC
-} from "./state/todolistsReducer";
-import {addTaskTC, changeStatusTC, removeTaskTC, updateTaskTitleTC} from "./state/taskReducer";
-import {AppRootStateType} from "./state/store";
+} from "../state/todolistsReducer";
+import {addTaskTC, changeStatusTC, removeTaskTC, updateTaskTitleTC} from "../state/taskReducer";
+import {AppRootStateType} from "../state/store";
 import {useDispatch, useSelector} from "react-redux";
-import {TaskStatuses} from "./api/todolist-api";
-import {TasksStateType} from "./App";
+import {TaskStatuses} from "../api/todolist-api";
+import {TasksStateType} from "../trash/App";
 import Paper from '@material-ui/core/Paper'
 import {Grid} from "@material-ui/core";
 
