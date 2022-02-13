@@ -3,15 +3,16 @@ import './App.css';
 import {Todolist} from "./Todolist";
 import {AddItemForm} from "./components/AddItemForm";
 import {
-    addTodolistAC, addTodolistTC,
-    changeFilterAC, filterType, removeTodolistTC, setTodolistsTC, TodolistDomainType,
-    updateTitleTodolistAC
+    addTodolistTC, changeFilterAC, filterType, removeTodolistTC, setTodolistsTC,
+    TodolistDomainType, updateTitleTodolistTC
 } from "./state/todolistsReducer";
 import {addTaskTC, changeStatusTC, removeTaskTC, updateTaskTitleTC} from "./state/taskReducer";
 import {AppRootStateType} from "./state/store";
 import {useDispatch, useSelector} from "react-redux";
 import {TaskStatuses} from "./api/todolist-api";
 import {TasksStateType} from "./App";
+import Paper from '@material-ui/core/Paper'
+import {Grid} from "@material-ui/core";
 
 
 export const AppWithRedux = () => {
@@ -57,7 +58,8 @@ export const AppWithRedux = () => {
     }, [dispatch])
 
     const updateTitleTodolist = useCallback((title: string, todolistID: string) => {
-        dispatch(updateTitleTodolistAC(title, todolistID))
+        dispatch(updateTitleTodolistTC(title, todolistID))
+        // dispatch(updateTitleTodolistAC(title, todolistID))
     }, [dispatch])
 
     const removeTodolist = useCallback((todolistID: string) => {
@@ -71,20 +73,24 @@ export const AppWithRedux = () => {
             {todolists.map(m => {
 
                     return (
-                        <Todolist
-                            todolistID={m.id}
-                            key={m.id}
-                            title={m.title}
-                            tasks={tasks[m.id]}
-                            removeTask={removeTask}
-                            changeFilter={changeFilter}
-                            addTask={addTask}
-                            changeStatus={changeStatus}
-                            filter={m.filter}
-                            updateTask={updateTask}
-                            updateTitleTodolist={updateTitleTodolist}
-                            removeTodolist={removeTodolist}
-                        />)
+                        <Grid item key={m.id} style={{paddingTop: '10px'}}>
+                            <Paper style={{padding: '10px'}}>
+                                <Todolist
+                                    todolistID={m.id}
+                                    key={m.id}
+                                    title={m.title}
+                                    tasks={tasks[m.id]}
+                                    removeTask={removeTask}
+                                    changeFilter={changeFilter}
+                                    addTask={addTask}
+                                    changeStatus={changeStatus}
+                                    filter={m.filter}
+                                    updateTask={updateTask}
+                                    updateTitleTodolist={updateTitleTodolist}
+                                    removeTodolist={removeTodolist}
+                                />
+                            </Paper>
+                        </Grid>)
                 }
             )
             }

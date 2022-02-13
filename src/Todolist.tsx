@@ -47,7 +47,7 @@ export const Todolist = React.memo((props: TodolistPropsType) => {
     }, [props.addTask, props.todolistID])
 
     const updateTitleTodolistHandler = (title: string) => {
-        props.updateTitleTodolist(props.todolistID, title)
+        props.updateTitleTodolist(title, props.todolistID)
     }
 
     const removeTodolistHandler = () => {
