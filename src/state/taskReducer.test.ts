@@ -1,6 +1,6 @@
 import {addTaskAC, changeStatusTaskAC, changeTitleTaskAC, removeTaskAC, setTasksAC, tasksReducer} from "./taskReducer";
-import {addTodolistAC, removeTodolistAC, setTodolistsAC, todolistsReducer} from "./todolistsReducer";
-import {TaskPriorities, TaskStatuses} from "../api/todolist-api";
+import {addTodolistAC, removeTodolistAC, setTodolistsAC} from "./todolistsReducer";
+import {TaskPriorities, TaskStatuses, UpdateModelTaskType} from "../api/todolist-api";
 import {TasksStateType} from "../App";
 
 let startState: TasksStateType
@@ -76,8 +76,16 @@ test('correct task should be added to correct array', () => {
 
 
 test('status of specified task should be changed', () => {
+    const task: UpdateModelTaskType = {
+        title: "rice",
+        description: "",
+        status: TaskStatuses.New,
+        priority: TaskPriorities.Low,
+        deadline: "",
+        startDate: ""
+    }
 
-    const action = changeStatusTaskAC(TaskStatuses.New, "2", "todolistId2");
+    const action = changeStatusTaskAC("todolistId2", "2", task.status);
 
     const endState = tasksReducer(startState, action)
 
@@ -87,8 +95,15 @@ test('status of specified task should be changed', () => {
 
 
 test('title of specified task should be changed', () => {
-
-    const action = changeTitleTaskAC("rice", "2",  "todolistId2");
+    const task: UpdateModelTaskType = {
+        title: "rice",
+        description: "",
+        status: TaskStatuses.New,
+        priority: TaskPriorities.Low,
+        deadline: "",
+        startDate: ""
+    }
+    const action = changeTitleTaskAC("todolistId2", "2",  task.title);
 
     const endState = tasksReducer(startState, action)
 
@@ -98,7 +113,10 @@ test('title of specified task should be changed', () => {
 
 test('new array should be added when new todolist is added', () => {
 
-    const action = addTodolistAC("new todolist");
+    const action = addTodolistAC({id: "todolistId3",
+        title: "new todolist",
+        addedDate: "",
+        order: 0});
 
     const endState = tasksReducer(startState, action)
 
