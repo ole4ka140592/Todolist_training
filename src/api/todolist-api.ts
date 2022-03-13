@@ -12,7 +12,7 @@ const instance = axios.create({
     ...settings
 })
 
-
+//api
 export const todolistApi = {
     getTodos() {
         return instance.get<Array<TodolistType>>("todo-lists")
@@ -41,7 +41,6 @@ export const todolistApi = {
         return instance.delete<BaseTaskType>(`todo-lists/${todolistId}/tasks/${taskId}`)
     }
 }
-
 
 
 //types

@@ -1,8 +1,8 @@
 import React, {useState} from 'react';
 import '../app/App.css';
-import {Todolist} from "./../features/Todolist";
+import {Todolist} from "../features/TodolistsList/Todolist/Todolist";
 import {v1} from "uuid";
-import {AddItemForm} from "../components/AddItemForm";
+import {AddItemForm} from "../components/AddItemForm/AddItemForm";
 import {Container, Grid} from "@material-ui/core";
 import {TaskPriorities, TaskStatuses, TaskType} from "../api/todolist-api";
 import {filterType, TodolistDomainType} from "../state/todolistsReducer";

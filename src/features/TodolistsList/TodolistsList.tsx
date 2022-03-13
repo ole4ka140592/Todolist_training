@@ -1,22 +1,23 @@
-import React, {useCallback, useEffect} from 'react';
-import './App.css';
-import {Todolist} from "../features/Todolist";
-import {AddItemForm} from "../components/AddItemForm";
-import {
-    addTodolistTC, changeFilterAC, filterType, removeTodolistTC, setTodolistsTC, TodolistDomainType,
-    updateTitleTodolistTC
-} from "../state/todolistsReducer";
-import {addTaskTC, changeStatusTC, removeTaskTC, updateTaskTitleTC} from "../state/taskReducer";
-import {AppRootStateType} from "../state/store";
 import {useDispatch, useSelector} from "react-redux";
-import {TaskStatuses} from "../api/todolist-api";
-import {TasksStateType} from "../trash/App";
-import Paper from '@material-ui/core/Paper'
+import {AppRootStateType} from "../../state/store";
+import {
+    addTodolistTC,
+    changeFilterAC,
+    filterType, removeTodolistTC,
+    setTodolistsTC,
+    TodolistDomainType, updateTitleTodolistTC
+} from "../../state/todolistsReducer";
+import {TasksStateType} from "../../trash/App";
+import React, {useCallback, useEffect} from "react";
+import {addTaskTC, changeStatusTC, removeTaskTC, updateTaskTitleTC} from "../../state/taskReducer";
+import {TaskStatuses} from "../../api/todolist-api";
+import {AddItemForm} from "../../components/AddItemForm/AddItemForm";
 import {Grid} from "@material-ui/core";
+import Paper from "@material-ui/core/Paper";
+import {Todolist} from "./Todolist/Todolist";
 
 
-export const AppWithRedux = () => {
-
+export const TodolistsList = () => {
     let todolists = useSelector<AppRootStateType, Array<TodolistDomainType>>(state => state.todolists)
 
     let tasks = useSelector<AppRootStateType, TasksStateType>(state => state.tasks)
@@ -97,5 +98,3 @@ export const AppWithRedux = () => {
         </div>
     )
 }
-
-

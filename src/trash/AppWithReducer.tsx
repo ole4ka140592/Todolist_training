@@ -1,8 +1,8 @@
 import React, {useReducer} from 'react';
 import '../app/App.css';
-import {Todolist} from "../features/Todolist";
+import {Todolist} from "../features/TodolistsList/Todolist/Todolist";
 import {v1} from "uuid";
-import {AddItemForm} from "../components/AddItemForm";
+import {AddItemForm} from "../components/AddItemForm/AddItemForm";
 import {
     addTodolistAC,
     changeFilterAC, filterType,

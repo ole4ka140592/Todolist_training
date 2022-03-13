@@ -1,8 +1,8 @@
-import {EditableSpan} from "./EditableSpan";
+import {EditableSpan} from "../../../../components/EditableSpan/EditableSpan";
 import React, {ChangeEvent} from "react";
 import {Delete} from "@material-ui/icons";
 import {IconButton} from "@material-ui/core";
-import {TaskStatuses, TaskType} from "../api/todolist-api";
+import {TaskStatuses, TaskType} from "../../../../api/todolist-api";
 
 
 type TasksPropsType = {
