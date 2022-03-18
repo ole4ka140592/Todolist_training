@@ -73,26 +73,32 @@ export const setTodolistsTC = () => (dispatch: Dispatch<TodolistsActionType>, ge
     dispatch(setAppStatusAC("loading"))
     todolistApi.getTodos()
         .then((res) => {
-            dispatch(setTodolistsAC(res.data))
             dispatch(setAppStatusAC("succeeded"))
+            dispatch(setTodolistsAC(res.data))
         })
 }
 export const removeTodolistTC = (todolistId: string) => (dispatch: Dispatch<TodolistsActionType>) => {
+    dispatch(setAppStatusAC("loading"))
     todolistApi.deleteTodo(todolistId)
         .then((res) => {
+            dispatch(setAppStatusAC("succeeded"))
             dispatch(removeTodolistAC(todolistId))
         })
 }
 export const addTodolistTC = (title: string) => (dispatch: Dispatch<TodolistsActionType>) => {
+    dispatch(setAppStatusAC("loading"))
     todolistApi.createTodo(title)
         .then((res) => {
+            dispatch(setAppStatusAC("succeeded"))
             dispatch(addTodolistAC(res.data.data.item))
         })
 }
 export const updateTitleTodolistTC = (title: string, todolistID: string) =>
     (dispatch: Dispatch<TodolistsActionType>) => {
+        dispatch(setAppStatusAC("loading"))
         todolistApi.updateTodoTitle(todolistID, title)
             .then(() => {
+                dispatch(setAppStatusAC("succeeded"))
                 dispatch(updateTitleTodolistAC(todolistID, title))
             })
     }
