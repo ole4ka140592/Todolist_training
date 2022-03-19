@@ -129,7 +129,10 @@ export const addTaskTC = (todolistId: string, title: string) => (dispatch: Dispa
                 }
                 dispatch(setAppStatusAC("failed"))
             }
-
+        })
+        .catch((error)=> {
+            dispatch(setAppErrorAC(error.message))
+            dispatch(setAppStatusAC("failed"))
         })
 }
 export const updateTaskTitleTC = (todolistId: string, taskId: string, title: string) =>
