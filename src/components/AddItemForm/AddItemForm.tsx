@@ -3,6 +3,7 @@ import React, {ChangeEvent, KeyboardEvent, useState} from "react";
 
 type AddItemFormPropsType = {
     callBack: (title: string) => void
+    entityStatus?: boolean
 }
 
 export const AddItemForm = React.memo((props: AddItemFormPropsType) => {
@@ -54,10 +55,12 @@ export const AddItemForm = React.memo((props: AddItemFormPropsType) => {
                        onChange={onChangeHandler}
                        onKeyPress={onKeyPressHandler}
                        className={error ? 'error' : ""}
+                       disabled={props.entityStatus}
             />
 
             {/*<button onClick={() => onClickAddTaskHandler(title)}>+</button>*/}
             <Button
+                disabled={props.entityStatus}
                 variant="outlined"
                 style={{maxWidth: "30px", maxHeight: "30px", minWidth: "30px", minHeight: "30px"}}
                 onClick={() => onClickAddTaskHandler(title)}>+</Button>

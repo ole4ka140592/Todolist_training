@@ -26,6 +26,10 @@ export const todolistsReducer = (state: Array<TodolistDomainType> = initialState
             return action.todolists.map(m => ({...m, filter: "all", entityStatus: "idle"})
             )
         }
+        case "CHANGE-TODOLIST-ENTITY-STATUS": {
+            return state.map(m => m.id === action.todolistID ? {...m, entityStatus:
+                action.entityStatus} : m)
+        }
 
         default:
             return state
@@ -67,6 +71,14 @@ export const setTodolistsAC = (todolists: Array<TodolistType>) => {
     } as const
 }
 
+export const changeTodolistEntityStatusAC = (todolistID: string, entityStatus: RequestStatusType) => {
+    return {
+        type: "CHANGE-TODOLIST-ENTITY-STATUS",
+        todolistID,
+        entityStatus
+    } as const
+}
+
 
 //thunk
 export const setTodolistsTC = () => (dispatch: Dispatch<TodolistsActionType>, getState: () => AppRootStateType): void => {
@@ -79,10 +91,20 @@ export const setTodolistsTC = () => (dispatch: Dispatch<TodolistsActionType>, ge
 }
 export const removeTodolistTC = (todolistId: string) => (dispatch: Dispatch<TodolistsActionType>) => {
     dispatch(setAppStatusAC("loading"))
+    dispatch(changeTodolistEntityStatusAC(todolistId, "loading"))
     todolistApi.deleteTodo(todolistId)
         .then((res) => {
-            dispatch(setAppStatusAC("succeeded"))
-            dispatch(removeTodolistAC(todolistId))
+            if (res.data.resultCode === 0) {
+                dispatch(setAppStatusAC("succeeded"))
+                dispatch(removeTodolistAC(todolistId))
+            } else {
+                if (res.data.messages.length) {
+                    dispatch(setAppErrorAC(res.data.messages[0]))
+                } else {
+                    dispatch(setAppErrorAC("Some error occurred"))
+                }
+                dispatch(setAppStatusAC("failed"))
+            }
         })
 }
 export const addTodolistTC = (title: string) => (dispatch: Dispatch<TodolistsActionType>) => {
@@ -122,10 +144,12 @@ export type TodolistsActionType =
     | SetTodolistsAT
     | SetAppStatusType
     | SetAppErrorType
+    | ChangeTodolistEntityStatusType
 
 export type AddTodolistAT = ReturnType<typeof addTodolistAC>
 export type RemoveTodolistAT = ReturnType<typeof removeTodolistAC>
 export type SetTodolistsAT = ReturnType<typeof setTodolistsAC>
+export type ChangeTodolistEntityStatusType = ReturnType<typeof changeTodolistEntityStatusAC>
 
 export type filterType = 'all' | 'active' | 'completed'
 

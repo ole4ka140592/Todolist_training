@@ -8,6 +8,7 @@ import {TaskStatuses, TaskType} from "../../../api/todolist-api";
 import {filterType} from "../../../state/todolistsReducer";
 import {setTasksTC} from "../../../state/taskReducer";
 import {useDispatch} from "react-redux";
+import {RequestStatusType} from "../../../app/app-reducer";
 
 export type TodolistPropsType = {
     title: string
@@ -21,13 +22,9 @@ export type TodolistPropsType = {
     updateTask: (todolistID: string, id: string, title: string) => void
     updateTitleTodolist: (title: string, todolistID: string) => void
     removeTodolist: (todolistID: string) => void
+    entityStatus: RequestStatusType
 }
 
-// export type TaskPropsType = {
-//     id: string
-//     title: string
-//     isDone: boolean
-// }
 
 export const Todolist = React.memo((props: TodolistPropsType) => {
     const dispatch = useDispatch()
@@ -84,14 +81,14 @@ export const Todolist = React.memo((props: TodolistPropsType) => {
             <h3>
                 <EditableSpan title={props.title} callBack={updateTitleTodolistHandler}/>
 
-                <IconButton aria-label="delete">
+                <IconButton aria-label="delete" disabled={props.entityStatus==="loading"}>
                     <Delete onClick={removeTodolistHandler}/>
                 </IconButton>
                 {/*<button onClick={removeTodolistHandler}>X</button>*/}
                 {/*{props.title}*/}
             </h3>
 
-            <AddItemForm callBack={addTaskHandler}/>
+            <AddItemForm callBack={addTaskHandler} entityStatus={props.entityStatus==="loading"}/>
 
             <ul>
                 {tasksForTodolist.map(t => <Task

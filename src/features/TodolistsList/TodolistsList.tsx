@@ -80,6 +80,7 @@ export const TodolistsList = () => {
                                     todolistID={m.id}
                                     key={m.id}
                                     title={m.title}
+                                    entityStatus={m. entityStatus}
                                     tasks={tasks[m.id]}
                                     removeTask={removeTask}
                                     changeFilter={changeFilter}

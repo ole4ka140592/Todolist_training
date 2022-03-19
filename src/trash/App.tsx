@@ -139,6 +139,7 @@ function App() {
                                         todolistID={m.id}
                                         key={m.id}
                                         title={m.title}
+                                        entityStatus={m. entityStatus}
                                         tasks={tasksForTodolist}
                                         removeTask={removeTask}
                                         changeFilter={changeFilter}
