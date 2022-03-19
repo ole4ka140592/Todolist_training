@@ -112,6 +112,10 @@ export const removeTaskTC = (todolistId: string, taskId: string) => (dispatch: D
             dispatch(setAppStatusAC("succeeded"))
             dispatch(removeTaskAC(taskId, todolistId))
         })
+        .catch((error)=> {
+            dispatch(setAppErrorAC(error.message))
+            dispatch(setAppStatusAC("failed"))
+        })
 }
 export const addTaskTC = (todolistId: string, title: string) => (dispatch: Dispatch<TasksActionType>) => {
     dispatch(setAppStatusAC("loading"))
@@ -153,6 +157,10 @@ export const updateTaskTitleTC = (todolistId: string, taskId: string, title: str
                     dispatch(setAppStatusAC("succeeded"))
                     dispatch(changeTitleTaskAC(todolistId, taskId, title))
                 })
+                .catch((error)=> {
+                    dispatch(setAppErrorAC(error.message))
+                    dispatch(setAppStatusAC("failed"))
+                })
         }
     }
 export const changeStatusTC = (todolistId: string, taskId: string, status: TaskStatuses) =>
@@ -173,6 +181,10 @@ export const changeStatusTC = (todolistId: string, taskId: string, status: TaskS
                 .then(() => {
                     dispatch(setAppStatusAC("succeeded"))
                     dispatch(changeStatusTaskAC(todolistId, taskId, status))
+                })
+                .catch((error)=> {
+                    dispatch(setAppErrorAC(error.message))
+                    dispatch(setAppStatusAC("failed"))
                 })
         }
     }
