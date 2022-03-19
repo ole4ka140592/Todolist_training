@@ -21,8 +21,8 @@ const AppWithReducer = () => {
     let todolistID2 = v1()
 
     let [todolists, dispatchToTodolists] = useReducer(todolistsReducer, [
-        {id: todolistID1, title: "What to learn", filter: "all", addedDate: "", order: 0},
-        {id: todolistID2, title: "What to buy", filter: "all", addedDate: "", order: 0}
+        {id: todolistID1, title: "What to learn", filter: "all", addedDate: "", order: 0, entityStatus: "idle"},
+        {id: todolistID2, title: "What to buy", filter: "all", addedDate: "", order: 0, entityStatus: "idle"}
     ])
 
     let [tasks, dispatchToTasks] = useReducer(tasksReducer, {
