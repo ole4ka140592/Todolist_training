@@ -3,8 +3,8 @@ import {TaskStatuses, TaskType, todolistApi, UpdateModelTaskType} from "../api/t
 import {TasksStateType} from "../trash/App";
 import {Dispatch} from "redux";
 import {AppRootStateType} from "./store";
-import {setAppErrorAC, SetAppErrorType, setAppStatusAC, SetAppStatusType} from "../app/app-reducer";
-import {handleServerNetworkError} from "../utils/error-utils";
+import {SetAppErrorType, setAppStatusAC, SetAppStatusType} from "../app/app-reducer";
+import {handleServerAppError, handleServerNetworkError} from "../utils/error-utils";
 
 
 let initialState: TasksStateType = {}
@@ -105,7 +105,7 @@ export const setTasksTC = (todolistId: string) => (dispatch: Dispatch<TasksActio
             let tasks = res.data.items
             dispatch(setTasksAC(todolistId, tasks))
         })
-        .catch((error)=> {
+        .catch((error) => {
             handleServerNetworkError(dispatch, error.message)
         })
 }
@@ -113,10 +113,14 @@ export const removeTaskTC = (todolistId: string, taskId: string) => (dispatch: D
     dispatch(setAppStatusAC("loading"))
     todolistApi.deleteTask(todolistId, taskId)
         .then((res) => {
-            dispatch(setAppStatusAC("succeeded"))
-            dispatch(removeTaskAC(taskId, todolistId))
+            if (res.data.resultCode === 0) {
+                dispatch(setAppStatusAC("succeeded"))
+                dispatch(removeTaskAC(taskId, todolistId))
+            } else {
+                handleServerAppError(dispatch, res.data)
+            }
         })
-        .catch((error)=> {
+        .catch((error) => {
             handleServerNetworkError(dispatch, error.message)
         })
 }
@@ -129,15 +133,10 @@ export const addTaskTC = (todolistId: string, title: string) => (dispatch: Dispa
                 let task = res.data.data.item
                 dispatch(addTaskAC(task))
             } else {
-                if (res.data.messages.length) {
-                    dispatch(setAppErrorAC(res.data.messages[0]))
-                } else {
-                    dispatch(setAppErrorAC("Some error occurred"))
-                }
-                dispatch(setAppStatusAC("failed"))
+                handleServerAppError(dispatch, res.data)
             }
         })
-        .catch((error)=> {
+        .catch((error) => {
             handleServerNetworkError(dispatch, error.message)
         })
 }
@@ -155,11 +154,15 @@ export const updateTaskTitleTC = (todolistId: string, taskId: string, title: str
             }
             dispatch(setAppStatusAC("loading"))
             todolistApi.updateTask(todolistId, taskId, model)
-                .then(() => {
-                    dispatch(setAppStatusAC("succeeded"))
-                    dispatch(changeTitleTaskAC(todolistId, taskId, title))
+                .then((res) => {
+                    if (res.data.resultCode === 0) {
+                        dispatch(setAppStatusAC("succeeded"))
+                        dispatch(changeTitleTaskAC(todolistId, taskId, title))
+                    } else {
+                        handleServerAppError(dispatch, res.data)
+                    }
                 })
-                .catch((error)=> {
+                .catch((error) => {
                     handleServerNetworkError(dispatch, error.message)
                 })
         }
@@ -179,11 +182,15 @@ export const changeStatusTC = (todolistId: string, taskId: string, status: TaskS
             }
             dispatch(setAppStatusAC("loading"))
             todolistApi.updateTask(todolistId, taskId, model)
-                .then(() => {
-                    dispatch(setAppStatusAC("succeeded"))
-                    dispatch(changeStatusTaskAC(todolistId, taskId, status))
+                .then((res) => {
+                    if (res.data.resultCode === 0) {
+                        dispatch(setAppStatusAC("succeeded"))
+                        dispatch(changeStatusTaskAC(todolistId, taskId, status))
+                    } else {
+                        handleServerAppError(dispatch, res.data)
+                    }
                 })
-                .catch((error)=> {
+                .catch((error) => {
                     handleServerNetworkError(dispatch, error.message)
                 })
         }

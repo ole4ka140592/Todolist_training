@@ -100,12 +100,6 @@ export const removeTodolistTC = (todolistId: string) => (dispatch: Dispatch<Todo
                 dispatch(removeTodolistAC(todolistId))
             } else {
                 handleServerAppError(dispatch, res.data)
-                // if (res.data.messages.length) {
-                //     dispatch(setAppErrorAC(res.data.messages[0]))
-                // } else {
-                //     dispatch(setAppErrorAC("Some error occurred"))
-                // }
-                // dispatch(setAppStatusAC("failed"))
             }
         })
         .catch((error)=> {

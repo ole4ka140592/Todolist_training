@@ -12,10 +12,15 @@ import React, {useCallback, useEffect} from "react";
 import {addTaskTC, changeStatusTC, removeTaskTC, updateTaskTitleTC} from "../../state/taskReducer";
 import {TaskStatuses} from "../../api/todolist-api";
 import {AddItemForm} from "../../components/AddItemForm/AddItemForm";
-import {Grid} from "@material-ui/core";
+import {Container, Grid, Toolbar, Typography} from "@material-ui/core";
 import Paper from "@material-ui/core/Paper";
 import {Todolist} from "./Todolist/Todolist";
-
+import AppBar from "@mui/material/AppBar";
+import Button from "@mui/material/Button";
+import IconButton from "@mui/material/IconButton";
+import MenuIcon from '@material-ui/icons/Menu';
+import {Box} from "@mui/material";
+import classes from "./TodolistsList.module.css";
 
 export const TodolistsList = () => {
     let todolists = useSelector<AppRootStateType, Array<TodolistDomainType>>(state => state.todolists)
@@ -70,32 +75,43 @@ export const TodolistsList = () => {
 
     return (
         <div className="App">
-            <AddItemForm callBack={addTodolist}/>
-            {todolists.map(m => {
 
-                    return (
-                        <Grid item key={m.id} style={{paddingTop: '10px'}}>
-                            <Paper style={{padding: '10px'}}>
-                                <Todolist
-                                    todolistID={m.id}
-                                    key={m.id}
-                                    title={m.title}
-                                    entityStatus={m. entityStatus}
-                                    tasks={tasks[m.id]}
-                                    removeTask={removeTask}
-                                    changeFilter={changeFilter}
-                                    addTask={addTask}
-                                    changeStatus={changeStatus}
-                                    filter={m.filter}
-                                    updateTask={updateTask}
-                                    updateTitleTodolist={updateTitleTodolist}
-                                    removeTodolist={removeTodolist}
-                                />
-                            </Paper>
-                        </Grid>)
-                }
-            )
-            }
+            <Container fixed>
+
+                <Grid container style={{padding: "20px"}}>
+                    <AddItemForm callBack={addTodolist}/>
+                </Grid>
+                <Grid container spacing={3}>
+                    {todolists.map(m => {
+
+                            return (
+                                // <div className={classes.todo}>
+                                    <Grid item key={m.id}>
+                                        <Paper style={{padding: '10px', width: '300px', display:"flex-row", margin: "20px"}}>
+                                            <Todolist
+                                                todolistID={m.id}
+                                                key={m.id}
+                                                title={m.title}
+                                                entityStatus={m.entityStatus}
+                                                tasks={tasks[m.id]}
+                                                removeTask={removeTask}
+                                                changeFilter={changeFilter}
+                                                addTask={addTask}
+                                                changeStatus={changeStatus}
+                                                filter={m.filter}
+                                                updateTask={updateTask}
+                                                updateTitleTodolist={updateTitleTodolist}
+                                                removeTodolist={removeTodolist}
+                                            />
+                                        </Paper>
+                                    </Grid>
+                                // </div>
+                            )
+                        }
+                    )
+                    }
+                </Grid>
+            </Container>
         </div>
     )
 }

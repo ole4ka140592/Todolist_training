@@ -50,7 +50,7 @@ export type TodolistType = {
     order: number
     title: string
 }
-type BaseTodolistType<T = {}> = {
+export type BaseTodolistType<T = {}> = {
     fieldsErrors: Array<string>
     messages: Array<string>
     resultCode: number
