@@ -7,11 +7,13 @@ import {AppRootStateType} from "../state/store";
 import {RequestStatusType} from "./app-reducer";
 import LinearProgress from "@material-ui/core/LinearProgress";
 import {ErrorSnackbar} from "../components/ErrorSnackbar/ErrorSnackbar";
-import {Box} from "@mui/material";
+
 import AppBar from "@mui/material/AppBar";
 import {Toolbar, Typography} from "@material-ui/core";
 import IconButton from "@mui/material/IconButton";
-import MenuIcon from "@material-ui/icons/Menu";
+import {Menu} from "@mui/icons-material";
+import {Button} from "@mui/material";
+
 
 
 
@@ -20,20 +22,22 @@ export const App = () => {
     const status = useSelector<AppRootStateType, RequestStatusType>(state=> state.app.status)
 
     return (
-        <div>
-            <Box sx={{flexGrow: 1}}>
+        <div >
+            <ErrorSnackbar/>
+            {/*<Box sx={{flexGrow: 1}}>*/}
                 <AppBar position="static">
-                    <Toolbar variant="dense">
-                        <IconButton edge="start" color="inherit" aria-label="menu" sx={{mr: 2}}>
-                            <MenuIcon/>
+                    <Toolbar>
+                        <IconButton edge="start" color="inherit" aria-label="menu" >
+                            <Menu/>
                         </IconButton>
-                        <Typography variant="h6" color="inherit" component="div">
-                            Todolists
+                        <Typography variant="h6" >
+
                         </Typography>
+                        <Button color="inherit">Login</Button>
                     </Toolbar>
                 </AppBar>
-            </Box>
-            <ErrorSnackbar/>
+            {/*</Box>*/}
+
             {status==="loading" && <LinearProgress color="secondary" />}
             <Container fixed>
                 <TodolistsList/>
