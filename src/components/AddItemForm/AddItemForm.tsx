@@ -1,5 +1,7 @@
 import {Button, TextField} from "@material-ui/core";
 import React, {ChangeEvent, KeyboardEvent, useState} from "react";
+import {IconButton} from "@mui/material";
+import {AddBox} from "@material-ui/icons";
 
 type AddItemFormPropsType = {
     callBack: (title: string) => void
@@ -59,11 +61,16 @@ export const AddItemForm = React.memo((props: AddItemFormPropsType) => {
             />
 
             {/*<button onClick={() => onClickAddTaskHandler(title)}>+</button>*/}
-            <Button
-                disabled={props.entityStatus}
-                variant="outlined"
-                style={{maxWidth: "30px", maxHeight: "30px", minWidth: "30px", minHeight: "30px"}}
-                onClick={() => onClickAddTaskHandler(title)}>+</Button>
+            {/*<Button*/}
+            {/*    disabled={props.entityStatus}*/}
+            {/*    variant="outlined"*/}
+            {/*    style={{maxWidth: "30px", maxHeight: "30px", minWidth: "30px", minHeight: "30px"}}*/}
+            {/*    onClick={() => onClickAddTaskHandler(title)}>+</Button>*/}
+            <IconButton color="primary"
+                        onClick={() => onClickAddTaskHandler(title)}
+                        disabled={props.entityStatus}>
+                <AddBox/>
+            </IconButton>
             {/*{error ? <div className='error-message'>{error}</div> : ""}*/}
         </div>
     )
