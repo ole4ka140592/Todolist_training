@@ -12,7 +12,7 @@ export default {
         removeTask: action("removeTask"),
         changeStatus: action("changeStatus"),
         updateTask: action("updateTask"),
-        todolist: "1"
+        todoListId: "1"
     }
 } as ComponentMeta<typeof Task>;
 

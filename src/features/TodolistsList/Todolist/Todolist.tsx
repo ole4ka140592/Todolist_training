@@ -34,6 +34,7 @@ export const Todolist = React.memo((props: TodolistPropsType) => {
     }, [])
 
     const changeFilterOnClickHandler = useCallback((value: filterType, todolistID: string) => {
+        debugger
         props.changeFilter(value, todolistID)
     }, [props.changeFilter])
 
@@ -63,15 +64,15 @@ export const Todolist = React.memo((props: TodolistPropsType) => {
         props.updateTask(props.todolistID, id, title)
     }, [])
 
-
+debugger
     let tasksForTodolist = props.tasks
 
     if (props.filter === 'active') {
-        tasksForTodolist = tasksForTodolist.filter(f => TaskStatuses.New)
+        tasksForTodolist = tasksForTodolist.filter(f => f.status === TaskStatuses.New)
     }
-
+debugger
     if (props.filter === 'completed') {
-        tasksForTodolist = tasksForTodolist.filter(f => TaskStatuses.Completed)
+        tasksForTodolist = tasksForTodolist.filter(f => f.status === TaskStatuses.Completed)
     }
 
 

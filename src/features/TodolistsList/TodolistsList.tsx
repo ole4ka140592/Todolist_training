@@ -26,7 +26,7 @@ export const TodolistsList = () => {
     let todolists = useSelector<AppRootStateType, Array<TodolistDomainType>>(state => state.todolists)
 
     let tasks = useSelector<AppRootStateType, TasksStateType>(state => state.tasks)
-
+debugger
     const dispatch = useDispatch()
 
     useEffect(() => {
