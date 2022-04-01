@@ -13,6 +13,8 @@ import {Toolbar, Typography} from "@material-ui/core";
 import IconButton from "@mui/material/IconButton";
 import {Menu} from "@mui/icons-material";
 import {Button} from "@mui/material";
+import {Login} from "../features/Login/Login";
+import {Route, Routes} from "react-router-dom";
 
 
 
@@ -40,7 +42,11 @@ export const App = () => {
 
             {status==="loading" && <LinearProgress color="secondary" />}
             <Container fixed>
-                <TodolistsList/>
+                <Routes>
+                    <Route path="/" element={<TodolistsList/>}/>
+                    <Route path="/login" element={<Login/>}/>
+
+                </Routes>
             </Container>
         </div>
     )
