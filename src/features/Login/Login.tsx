@@ -9,6 +9,8 @@ import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import {useFormik} from "formik";
 import classes from "./Login.module.css";
+import {loginTC} from "./loginReducer";
+import {useDispatch} from "react-redux";
 
 
 type FormikErrorType = {
@@ -19,6 +21,8 @@ type FormikErrorType = {
 
 
 export const Login = () => {
+
+    const dispatch = useDispatch()
 
     const formik = useFormik({
         initialValues: {
@@ -45,7 +49,8 @@ export const Login = () => {
         },
 
         onSubmit: values => {
-            alert(JSON.stringify(values));
+            //
+            dispatch(loginTC(values))
         },
     })
 
