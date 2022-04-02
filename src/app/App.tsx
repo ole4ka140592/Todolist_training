@@ -14,7 +14,7 @@ import IconButton from "@mui/material/IconButton";
 import {Menu} from "@mui/icons-material";
 import {Button} from "@mui/material";
 import {Login} from "../features/Login/Login";
-import {Route, Routes} from "react-router-dom";
+import {Navigate, Route, Routes} from "react-router-dom";
 
 
 
@@ -45,6 +45,9 @@ export const App = () => {
                 <Routes>
                     <Route path="/" element={<TodolistsList/>}/>
                     <Route path="/login" element={<Login/>}/>
+                    <Route path="/404" element={<h1>404: PAGE NOT FOUND</h1>}/>
+                    <Route path="*" element={<Navigate to="/404"/>}/>
+
 
                 </Routes>
             </Container>
