@@ -12,24 +12,23 @@ import React, {useCallback, useEffect} from "react";
 import {addTaskTC, changeStatusTC, removeTaskTC, updateTaskTitleTC} from "../../state/taskReducer";
 import {TaskStatuses} from "../../api/todolist-api";
 import {AddItemForm} from "../../components/AddItemForm/AddItemForm";
-import {Container, Grid, Toolbar, Typography} from "@material-ui/core";
+import {Container, Grid} from "@material-ui/core";
 import Paper from "@material-ui/core/Paper";
 import {Todolist} from "./Todolist/Todolist";
-import AppBar from "@mui/material/AppBar";
-import Button from "@mui/material/Button";
-import IconButton from "@mui/material/IconButton";
-import MenuIcon from '@material-ui/icons/Menu';
-import {Box} from "@mui/material";
-import classes from "./TodolistsList.module.css";
+import {Navigate} from "react-router-dom";
+
 
 export const TodolistsList = () => {
     let todolists = useSelector<AppRootStateType, Array<TodolistDomainType>>(state => state.todolists)
-
+    const isLoggedIn = useSelector<AppRootStateType, boolean>(state => state.login.isLoggedIn)
     let tasks = useSelector<AppRootStateType, TasksStateType>(state => state.tasks)
-debugger
+    debugger
     const dispatch = useDispatch()
 
     useEffect(() => {
+        if (!isLoggedIn) {
+            return
+        }
         dispatch(setTodolistsTC())
     }, [])
 
@@ -73,6 +72,10 @@ debugger
         // dispatch(removeTodolistAC(todolistID))
     }, [dispatch])
 
+    if (!isLoggedIn) {
+        return <Navigate to={'login'}/>
+    }
+
     return (
         <div className="App">
 
@@ -86,25 +89,25 @@ debugger
 
                             return (
                                 // <div className={classes.todo}>
-                                    <Grid item key={m.id}>
-                                        <Paper style={{padding: '10px', width: '300px', display:"flex-row", margin: "20px"}}>
-                                            <Todolist
-                                                todolistID={m.id}
-                                                key={m.id}
-                                                title={m.title}
-                                                entityStatus={m.entityStatus}
-                                                tasks={tasks[m.id]}
-                                                removeTask={removeTask}
-                                                changeFilter={changeFilter}
-                                                addTask={addTask}
-                                                changeStatus={changeStatus}
-                                                filter={m.filter}
-                                                updateTask={updateTask}
-                                                updateTitleTodolist={updateTitleTodolist}
-                                                removeTodolist={removeTodolist}
-                                            />
-                                        </Paper>
-                                    </Grid>
+                                <Grid item key={m.id}>
+                                    <Paper style={{padding: '10px', width: '300px', display: "flex-row", margin: "20px"}}>
+                                        <Todolist
+                                            todolistID={m.id}
+                                            key={m.id}
+                                            title={m.title}
+                                            entityStatus={m.entityStatus}
+                                            tasks={tasks[m.id]}
+                                            removeTask={removeTask}
+                                            changeFilter={changeFilter}
+                                            addTask={addTask}
+                                            changeStatus={changeStatus}
+                                            filter={m.filter}
+                                            updateTask={updateTask}
+                                            updateTitleTodolist={updateTitleTodolist}
+                                            removeTodolist={removeTodolist}
+                                        />
+                                    </Paper>
+                                </Grid>
                                 // </div>
                             )
                         }

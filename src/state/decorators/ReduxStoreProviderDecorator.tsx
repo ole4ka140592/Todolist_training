@@ -37,6 +37,9 @@ let initialGlobalState = {
     app: {
         status: 'idle',
         error: "ERROR" as string | null
+    },
+    login: {
+        isLoggedIn: false
     }
 };
 

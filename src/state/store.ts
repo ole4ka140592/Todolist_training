@@ -3,11 +3,13 @@ import {todolistsReducer} from './todolistsReducer';
 import {applyMiddleware, combineReducers, createStore} from "redux";
 import thunk from "redux-thunk";
 import {appReducer} from "../app/app-reducer";
+import {loginReducer} from "../features/Login/loginReducer";
 
 const rootReducer = combineReducers({
     tasks: tasksReducer,
     todolists: todolistsReducer,
-    app: appReducer
+    app: appReducer,
+    login: loginReducer
 })
 
 
