@@ -21,10 +21,16 @@ export const App = () => {
 
     const status = useSelector<AppRootStateType, RequestStatusType>(state=> state.app.status)
     const dispatch = useDispatch()
+    const isInitialized = useSelector<AppRootStateType, boolean>(state => state.app.isInitialized)
 
     useEffect( ()=> {
         dispatch(initializeAppTC())
     }, [])
+
+    if (!isInitialized) {
+       return <LinearProgress color="secondary" />
+    }
+
 
     return (
         <div >

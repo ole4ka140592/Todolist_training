@@ -5,7 +5,8 @@ import {handleServerAppError, handleServerNetworkError} from "../utils/error-uti
 
 const initialState = {
     status: 'loading' as RequestStatusType,
-    error: null as NullableType<string>
+    error: null as NullableType<string>,
+    isInitialized: false
 }
 
 type InitialStateType = typeof initialState
@@ -17,6 +18,9 @@ export const appReducer = (state: InitialStateType = initialState, action: AppRe
 
         case "APP/SET-ERROR":
             return {...state, error: action.error}
+
+        case "APP/SET-INITIALIZED":
+            return {...state, isInitialized: action.isInitialized}
 
         default:
             return state
@@ -39,6 +43,13 @@ export const setAppErrorAC = (error: string | null) => {
     } as const
 }
 
+export const setIsInitializedAC = (isInitialized: boolean) => {
+    return {
+        type: "APP/SET-INITIALIZED",
+        isInitialized
+    } as const
+}
+
 // thunks
 export const initializeAppTC = () => (dispatch: Dispatch) => {
     dispatch(setAppStatusAC('loading'))
@@ -54,15 +65,16 @@ export const initializeAppTC = () => (dispatch: Dispatch) => {
         .catch((error) => {
                 handleServerNetworkError(dispatch, error.message)
             })
-
+        .finally(()=> {
+            dispatch(setIsInitializedAC(true))
+        })
 }
-
 
 
 //types
 export type RequestStatusType = 'idle' | 'loading' | 'succeeded' | 'failed'
 export type NullableType<T> = null | T
-
 export type SetAppStatusType = ReturnType<typeof setAppStatusAC>
 export type SetAppErrorType = ReturnType<typeof setAppErrorAC>
-export type AppReducerActionsType = SetAppStatusType | SetAppErrorType
+export type SetIsInitializedType = ReturnType<typeof setIsInitializedAC>
+export type AppReducerActionsType = SetAppStatusType | SetAppErrorType | SetIsInitializedType
