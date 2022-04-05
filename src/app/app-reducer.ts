@@ -3,6 +3,7 @@ import {todolistApi} from "../api/todolist-api";
 import {setIsLoggedInAC} from "../features/Login/loginReducer";
 import {handleServerAppError, handleServerNetworkError} from "../utils/error-utils";
 
+
 const initialState = {
     status: 'loading' as RequestStatusType,
     error: null as NullableType<string>,
@@ -49,6 +50,7 @@ export const setIsInitializedAC = (isInitialized: boolean) => {
         isInitialized
     } as const
 }
+
 
 // thunks
 export const initializeAppTC = () => (dispatch: Dispatch) => {

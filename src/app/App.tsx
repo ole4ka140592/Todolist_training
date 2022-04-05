@@ -7,7 +7,6 @@ import {AppRootStateType} from "../state/store";
 import {initializeAppTC, RequestStatusType} from "./app-reducer";
 import LinearProgress from "@material-ui/core/LinearProgress";
 import {ErrorSnackbar} from "../components/ErrorSnackbar/ErrorSnackbar";
-
 import AppBar from "@mui/material/AppBar";
 import {Toolbar, Typography} from "@material-ui/core";
 import IconButton from "@mui/material/IconButton";
@@ -19,37 +18,34 @@ import {Navigate, Route, Routes} from "react-router-dom";
 
 export const App = () => {
 
-    const status = useSelector<AppRootStateType, RequestStatusType>(state=> state.app.status)
+    const status = useSelector<AppRootStateType, RequestStatusType>(state => state.app.status)
     const dispatch = useDispatch()
     const isInitialized = useSelector<AppRootStateType, boolean>(state => state.app.isInitialized)
 
-    useEffect( ()=> {
+    useEffect(() => {
         dispatch(initializeAppTC())
     }, [])
 
     if (!isInitialized) {
-       return <LinearProgress color="secondary" />
+        return <LinearProgress color="secondary"/>
     }
 
 
     return (
-        <div >
+        <div>
             <ErrorSnackbar/>
-            {/*<Box sx={{flexGrow: 1}}>*/}
-                <AppBar position="static">
-                    <Toolbar>
-                        <IconButton edge="start" color="inherit" aria-label="menu" >
-                            <Menu/>
-                        </IconButton>
-                        <Typography variant="h6" >
+            <AppBar position="static">
+                <Toolbar>
+                    <IconButton edge="start" color="inherit" aria-label="menu">
+                        <Menu/>
+                    </IconButton>
+                    <Typography variant="h6">
 
-                        </Typography>
-                        <Button color="inherit">Login</Button>
-                    </Toolbar>
-                </AppBar>
-            {/*</Box>*/}
-
-            {status==="loading" && <LinearProgress color="secondary" />}
+                    </Typography>
+                    <Button color="inherit">Login</Button>
+                </Toolbar>
+            </AppBar>
+            {status === "loading" && <LinearProgress color="secondary"/>}
             <Container fixed>
                 <Routes>
                     <Route path="/" element={<TodolistsList/>}/>

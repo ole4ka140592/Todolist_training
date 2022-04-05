@@ -2,7 +2,7 @@ import { Dispatch } from 'redux'
 import {SetAppErrorType, setAppStatusAC, SetAppStatusType} from '../../app/app-reducer'
 import {todolistApi} from "../../api/todolist-api";
 import {handleServerAppError, handleServerNetworkError} from "../../utils/error-utils";
-import {setTasksAC} from "../../state/taskReducer";
+
 
 const initialState = {
     isLoggedIn: false
@@ -17,9 +17,12 @@ export const loginReducer = (state: InitialStateType = initialState, action: Act
             return state
     }
 }
+
+
 // actions
 export const setIsLoggedInAC = (value: boolean) =>
     ({type: 'login/SET-IS-LOGGED-IN', value} as const)
+
 
 // thunks
 export const loginTC = (data: any) => (dispatch: Dispatch<ActionsType>) => {
@@ -38,5 +41,8 @@ export const loginTC = (data: any) => (dispatch: Dispatch<ActionsType>) => {
         })
 }
 
+
 // types
-type ActionsType = ReturnType<typeof setIsLoggedInAC> | SetAppStatusType | SetAppErrorType
+type ActionsType = ReturnType<typeof setIsLoggedInAC>
+    | SetAppStatusType
+    | SetAppErrorType

@@ -21,7 +21,6 @@ type FormikErrorType = {
     rememberMe?: boolean
 }
 
-
 export const Login = () => {
 
     const dispatch = useDispatch()
@@ -75,8 +74,6 @@ export const Login = () => {
                         <p>Email: free@samuraijs.com</p>
                         <p>Password: free</p>
                     </FormLabel>
-
-
                     <FormGroup>
                         <TextField label="Email"
                                    margin="normal"
@@ -110,8 +107,6 @@ export const Login = () => {
                             Login
                         </Button>
                     </FormGroup>
-
-
                 </FormControl>
             </form>
         </Grid>

@@ -3,6 +3,7 @@ import {addTodolistAC, removeTodolistAC, setTodolistsAC} from "./todolistsReduce
 import {TaskPriorities, TaskStatuses, UpdateModelTaskType} from "../api/todolist-api";
 import {TasksStateType} from "../trash/App";
 
+
 let startState: TasksStateType
 
 beforeEach(()=> {
