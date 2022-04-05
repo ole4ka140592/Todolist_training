@@ -1,20 +1,20 @@
 {
   "files": {
-    "main.css": "/Todolist_training/static/css/main.6321107d.chunk.css",
-    "main.js": "/Todolist_training/static/js/main.db189ef7.chunk.js",
-    "main.js.map": "/Todolist_training/static/js/main.db189ef7.chunk.js.map",
+    "main.css": "/Todolist_training/static/css/main.62bd0231.chunk.css",
+    "main.js": "/Todolist_training/static/js/main.abe9c9ab.chunk.js",
+    "main.js.map": "/Todolist_training/static/js/main.abe9c9ab.chunk.js.map",
     "runtime-main.js": "/Todolist_training/static/js/runtime-main.247e21fd.js",
     "runtime-main.js.map": "/Todolist_training/static/js/runtime-main.247e21fd.js.map",
-    "static/js/2.a56c57fd.chunk.js": "/Todolist_training/static/js/2.a56c57fd.chunk.js",
-    "static/js/2.a56c57fd.chunk.js.map": "/Todolist_training/static/js/2.a56c57fd.chunk.js.map",
+    "static/js/2.be7b00b3.chunk.js": "/Todolist_training/static/js/2.be7b00b3.chunk.js",
+    "static/js/2.be7b00b3.chunk.js.map": "/Todolist_training/static/js/2.be7b00b3.chunk.js.map",
     "index.html": "/Todolist_training/index.html",
-    "static/css/main.6321107d.chunk.css.map": "/Todolist_training/static/css/main.6321107d.chunk.css.map",
-    "static/js/2.a56c57fd.chunk.js.LICENSE.txt": "/Todolist_training/static/js/2.a56c57fd.chunk.js.LICENSE.txt"
+    "static/css/main.62bd0231.chunk.css.map": "/Todolist_training/static/css/main.62bd0231.chunk.css.map",
+    "static/js/2.be7b00b3.chunk.js.LICENSE.txt": "/Todolist_training/static/js/2.be7b00b3.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.247e21fd.js",
-    "static/js/2.a56c57fd.chunk.js",
-    "static/css/main.6321107d.chunk.css",
-    "static/js/main.db189ef7.chunk.js"
+    "static/js/2.be7b00b3.chunk.js",
+    "static/css/main.62bd0231.chunk.css",
+    "static/js/main.abe9c9ab.chunk.js"
   ]
 }
