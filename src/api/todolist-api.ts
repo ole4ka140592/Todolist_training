@@ -41,7 +41,10 @@ export const todolistApi = {
         return instance.delete<BaseTaskType>(`todo-lists/${todolistId}/tasks/${taskId}`)
     },
     login(data: LoginParamsType) {
-        return instance.post<BaseTaskType<{userId: number}>>("auth/login", data)
+        return instance.post<BaseTaskType<{ userId: number }>>("auth/login", data)
+    },
+    me() {
+        return instance.get<BaseTaskType<MeResponseType>>("auth/me")
     }
 }
 
@@ -54,6 +57,15 @@ type LoginParamsType = {
     captcha?: string
 }
 
+type MeResponseType = {
+    resultCode: number
+    messages: string[],
+    data: {
+        id: number,
+        email: string,
+        login: string
+    }
+}
 
 export type TodolistType = {
     addedDate: string
@@ -67,12 +79,14 @@ export type BaseTodolistType<T = {}> = {
     resultCode: number
     data: T
 }
+
 export enum TaskStatuses {
     New,
     InProgress,
     Completed,
     Draft
 }
+
 export enum TaskPriorities {
     Low,
     Middle,
@@ -80,6 +94,7 @@ export enum TaskPriorities {
     Urgently,
     Later
 }
+
 export type TaskType = {
     description: string
     title: string
@@ -111,9 +126,6 @@ type BaseTaskType<T = {}> = {
     resultCode: number
     data: T
 }
-
-
-
 
 
 // type CreateTaskType = {

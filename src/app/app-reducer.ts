@@ -1,3 +1,8 @@
+import {Dispatch} from "redux";
+import {todolistApi} from "../api/todolist-api";
+import {setIsLoggedInAC} from "../features/Login/loginReducer";
+import {handleServerAppError, handleServerNetworkError} from "../utils/error-utils";
+
 const initialState = {
     status: 'loading' as RequestStatusType,
     error: null as NullableType<string>
@@ -33,6 +38,25 @@ export const setAppErrorAC = (error: string | null) => {
         error
     } as const
 }
+
+// thunks
+export const initializeAppTC = () => (dispatch: Dispatch) => {
+    dispatch(setAppStatusAC('loading'))
+    todolistApi.me()
+        .then(res => {
+            if (res.data.resultCode === 0) {
+                dispatch(setAppStatusAC("succeeded"))
+                dispatch(setIsLoggedInAC(true));
+            } else {
+                handleServerAppError(dispatch, res.data)
+            }
+        })
+        .catch((error) => {
+                handleServerNetworkError(dispatch, error.message)
+            })
+
+}
+
 
 
 //types
