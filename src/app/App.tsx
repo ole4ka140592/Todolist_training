@@ -14,6 +14,7 @@ import {Menu} from "@mui/icons-material";
 import {Button} from "@mui/material";
 import {Login} from "../features/Login/Login";
 import {Navigate, Route, Routes} from "react-router-dom";
+import {logoutTC} from "../features/Login/loginReducer";
 
 
 export const App = () => {
@@ -21,6 +22,11 @@ export const App = () => {
     const status = useSelector<AppRootStateType, RequestStatusType>(state => state.app.status)
     const dispatch = useDispatch()
     const isInitialized = useSelector<AppRootStateType, boolean>(state => state.app.isInitialized)
+    const isLoggedIn = useSelector<AppRootStateType, boolean>(state=> state.login.isLoggedIn)
+
+    const onClickLogOut = () => {
+        dispatch(logoutTC())
+    }
 
     useEffect(() => {
         dispatch(initializeAppTC())
@@ -40,9 +46,11 @@ export const App = () => {
                         <Menu/>
                     </IconButton>
                     <Typography variant="h6">
-
                     </Typography>
-                    <Button color="inherit">Login</Button>
+                    {isLoggedIn
+                        ? <Button color="inherit" onClick={onClickLogOut}>LogOut</Button>
+                        : <Button color="inherit">Login</Button>
+                    }
                 </Toolbar>
             </AppBar>
             {status === "loading" && <LinearProgress color="secondary"/>}

@@ -45,6 +45,9 @@ export const todolistApi = {
     },
     me() {
         return instance.get<BaseTaskType<MeResponseType>>("auth/me")
+    },
+    logout() {
+        return instance.delete<BaseTaskType<LogoutDeleteType>>("auth/login")
     }
 }
 
@@ -55,6 +58,12 @@ type LoginParamsType = {
     password: string,
     rememberMe?: boolean,
     captcha?: string
+}
+
+type LogoutDeleteType = {
+    resultCode: number,
+    messages: string[],
+    data: {}
 }
 
 type MeResponseType = {

@@ -41,6 +41,22 @@ export const loginTC = (data: any) => (dispatch: Dispatch<ActionsType>) => {
         })
 }
 
+export const logoutTC = () => (dispatch: Dispatch<ActionsType>) => {
+    dispatch(setAppStatusAC('loading'))
+    todolistApi.logout()
+        .then((res) => {
+            if (res.data.resultCode === 0) {
+                dispatch(setAppStatusAC("succeeded"))
+                dispatch(setIsLoggedInAC(false))
+            } else {
+                handleServerAppError(dispatch, res.data)
+            }
+        })
+        .catch((error) => {
+            handleServerNetworkError(dispatch, error.message)
+        })
+}
+
 
 // types
 type ActionsType = ReturnType<typeof setIsLoggedInAC>
