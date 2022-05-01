@@ -9,13 +9,13 @@ import {HashRouter} from "react-router-dom";
 
 
 ReactDOM.render(
-    <HashRouter>
     <Provider store={store}>
         {/*<BrowserRouter>*/}
+        <HashRouter>
             <App />
         {/*</BrowserRouter>*/}
-    </Provider>
-    </HashRouter>,
+        </HashRouter>
+    </Provider>,
     document.getElementById('root'));
 
 // If you want your app to work offline and load faster, you can change
