@@ -34,7 +34,6 @@ export const Todolist = React.memo((props: TodolistPropsType) => {
     }, [])
 
     const changeFilterOnClickHandler = useCallback((value: filterType, todolistID: string) => {
-        debugger
         props.changeFilter(value, todolistID)
     }, [props.changeFilter])
 
