@@ -1,8 +1,8 @@
 {
   "files": {
     "main.css": "/Todolist_training/static/css/main.62bd0231.chunk.css",
-    "main.js": "/Todolist_training/static/js/main.5269038a.chunk.js",
-    "main.js.map": "/Todolist_training/static/js/main.5269038a.chunk.js.map",
+    "main.js": "/Todolist_training/static/js/main.62f05aa4.chunk.js",
+    "main.js.map": "/Todolist_training/static/js/main.62f05aa4.chunk.js.map",
     "runtime-main.js": "/Todolist_training/static/js/runtime-main.247e21fd.js",
     "runtime-main.js.map": "/Todolist_training/static/js/runtime-main.247e21fd.js.map",
     "static/js/2.be7b00b3.chunk.js": "/Todolist_training/static/js/2.be7b00b3.chunk.js",
@@ -15,6 +15,6 @@
     "static/js/runtime-main.247e21fd.js",
     "static/js/2.be7b00b3.chunk.js",
     "static/css/main.62bd0231.chunk.css",
-    "static/js/main.5269038a.chunk.js"
+    "static/js/main.62f05aa4.chunk.js"
   ]
 }
