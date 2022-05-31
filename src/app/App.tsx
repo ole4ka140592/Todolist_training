@@ -40,15 +40,15 @@ export const App = () => {
     return (
         <div>
             <ErrorSnackbar/>
-            <AppBar position="fixed" style={{height: "70px"}}>
-                <Toolbar>
-                    <IconButton edge="start" color="inherit" aria-label="menu">
-                        <Menu/>
+            <AppBar position="fixed" style={{height: "70px", display: "flex", justifyContent: "center"}}>
+                <Toolbar style={{display: "flex", alignItems: "center"}}>
+                    <IconButton edge="start" color="inherit" aria-label="menu" >
+                        <Menu style={{verticalAlign: "middle"}}/>
                     </IconButton>
                     <Typography variant="h6">
                     </Typography>
                     {isLoggedIn
-                        ? <Button color="inherit" onClick={onClickLogOut}>LogOut</Button>
+                        ? <Button color="inherit" onClick={onClickLogOut} style={{textAlign: "center", display: "flex", justifyContent: "center"}}>LogOut</Button>
                         : <Button color="inherit">Login</Button>
                     }
                 </Toolbar>
