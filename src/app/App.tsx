@@ -40,7 +40,7 @@ export const App = () => {
     return (
         <div>
             <ErrorSnackbar/>
-            <AppBar position="fixed" >
+            <AppBar position="fixed" style={{height: "70px"}}>
                 <Toolbar>
                     <IconButton edge="start" color="inherit" aria-label="menu">
                         <Menu/>
