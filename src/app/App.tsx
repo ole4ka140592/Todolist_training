@@ -40,7 +40,7 @@ export const App = () => {
     return (
         <div>
             <ErrorSnackbar/>
-            <AppBar position="static">
+            <AppBar position="fixed" >
                 <Toolbar>
                     <IconButton edge="start" color="inherit" aria-label="menu">
                         <Menu/>
@@ -54,7 +54,7 @@ export const App = () => {
                 </Toolbar>
             </AppBar>
             {status === "loading" && <LinearProgress color="secondary"/>}
-            <Container fixed>
+            <Container fixed style={{marginTop: "70px"}}>
                 <Routes>
                     <Route path="/" element={<TodolistsList/>}/>
                     <Route path="/login" element={<Login/>}/>

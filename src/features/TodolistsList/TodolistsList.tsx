@@ -89,7 +89,7 @@ export const TodolistsList = () => {
                             return (
                                 // <div className={classes.todo}>
                                 <Grid item key={m.id}>
-                                    <Paper style={{padding: '10px', width: '300px', display: "flex-row", margin: "20px"}}>
+                                    <Paper style={{padding: '10px', width: '270px', display: "flex-row", margin: "20px"}}>
                                         <Todolist
                                             todolistID={m.id}
                                             key={m.id}
